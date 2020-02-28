@@ -26,32 +26,25 @@
 </html>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-    // 百度地图API功能
-    var points = [{
-        lng: '113.75064086914',
-        lat: '23.024320602417'
-    }, {
-        lng: '113.80903625488',
-        lat: '22.821039199829'
-    }, {
-        lng: '113.78968811035',
-        lat: '23.034345626831'
-    }, {
-        lng: '113.75749206543',
-        lat: '23.059717178345'
-    }]
+    // 百度地图API功能  wjugk4K7tYpHO6RUQyzZBMKx3DPUcmVM
+    // $.getJSON('data-area.json', function(data) {
+    //     console.log(data);
+    // });
 
     var map = new BMap.Map("allmap");
-    var point = new BMap.Point(113.76815, 23.033121);
+    var point = new BMap.Point(113.720287, 23.020079);
     map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
     map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
-    map.centerAndZoom(point, 14);
+    map.centerAndZoom(point, 12);
+    var geolocation = new BMap.Geolocation(); //返回用户当前的位置
+    geolocation.getCurrentPosition(function(e) {
+        console.log(e)
+    })
 
 
     // 定义构造函数并继承Overlay
-    function CustomOverlay(center, img, name, text) {
+    function CustomOverlay(center, name, text) {
         this._center = center;
-        this._img = img;
         this._name = name;
         this._text = text;
     }
@@ -70,17 +63,17 @@
         div.style.background = "red";
         div.style.MozUserSelect = 'none';
         div.style.borderRadius = "100%";
+        div.style.height = '74px';
+        div.style.width = '74px';
 
-        var oneDiv = document.createElement("div");
-        $(oneDiv).css({
-            "height": "74",
-            "width": "74"
+        var sonDiv = document.createElement("div");
+        $(sonDiv).css({
+            "height": "74px",
+            "width": "74px"
         });
-        $(oneDiv).append('<a style="display:block;font-size:12px;color:#fff;text-align:center;line-height:18px;margin-top:8px;">麻涌<br>1.4万元/㎡<br>212套</a>')
-            // $(div).append('<div class="detail" style="display:none; position:absolute;padding:10px; left:25px; background:#fff;">' +
-            //     '<div style="width:258px;height: 20px;"><span style="float: left;">名称：</span><span style="float: left;">' + this._name +
-            //     '</span></div><div style="width: 258px;height: 20px;"><span style="float:left;">备注：</span><span style="float:left;">' + this._text + '</span></div></div>');
-        div.appendChild(oneDiv);
+        $(sonDiv).append('<a style="height:74px;width:74px;display:block;font-size:12px;color:#fff;text-align:center;line-height:18px;margin-top:8px;">' + this._name + this._text + '</a>')
+
+        div.appendChild(sonDiv);
         $(div).mousemove(function() {
             $(this).css("z-index", "999999");
             $(this).css("background", "green");
@@ -123,24 +116,57 @@
 
     function buildBaiduMap(result) {
         // 创建Map实例
-        // 构造地图时，关闭地图可点功能
-
-        console.log(result)
         var pointArray = [];
-        for (var i = 0; i < result.length; i++) {
-            var one = result[i];
-            var longitude = one['lng'];
-            var latitude = one['lat'];
-            var name = 'okkk';
-            var remark = 'jjj';
+        for (var i = 0; i < result.loupan.hit.length; i++) {
+            var sub = result.loupan.hit[i];
+            var longitude = sub['x'];
+            var latitude = sub['y'];
+            var name = sub['projname'];
+            var text = '<br>' + sub['price'] + '元/㎡<br>' + sub['tao'] + '套';
             var point = new BMap.Point(longitude, latitude);
-            var marker = new CustomOverlay(point, '', name, remark);
+            var marker = new CustomOverlay(point, name, text);
             pointArray.push(point);
             map.addOverlay(marker);
         }
         //让所有点在视野范围内
-        map.setViewport(pointArray);
+        // map.setViewport(pointArray);
     }
 
-    buildBaiduMap(points);
+    $(function() {
+
+    })
+    $(document).on('mousewheel DOMMouseScroll', onMouseScroll);
+
+
+    function onMouseScroll() {
+        var zoom = map.getZoom();
+        console.log(zoom)
+        switch (zoom) {
+            case 10:
+            case 11:
+            case 12:
+                map.clearOverlays();
+                $.getJSON('data-town.json', function(data) {
+                    buildBaiduMap(data);
+                    console.log('town')
+                });
+                break;
+            case 13:
+            case 14:
+                map.clearOverlays();
+                $.getJSON('data-area.json', function(data) {
+                    buildBaiduMap(data);
+                    console.log('area')
+                });
+                break;
+            case 15:
+            case 16:
+                map.clearOverlays();
+                $.getJSON('data-estate.json', function(data) {
+                    buildBaiduMap(data);
+                    console.log('area')
+                });
+                break;
+        }
+    }
 </script>

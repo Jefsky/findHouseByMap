@@ -1,0 +1,314 @@
+{
+    "searchtype": "city",
+    "loupan": {
+        "hit": [
+            {
+                "id": 99,
+                "projname": "南城",
+                "x": 113.75064086914,
+                "y": 23.024320602417,
+                "price": "19636",
+                "baidu_coord": " ",
+                "tao": "2229"
+            },
+            {
+                "id": 105,
+                "projname": "长安",
+                "x": 113.80903625488,
+                "y": 22.821039199829,
+                "price": "16619",
+                "baidu_coord": " ",
+                "tao": "837"
+            },
+            {
+                "id": 98,
+                "projname": "东城",
+                "x": 113.78968811035,
+                "y": 23.034345626831,
+                "price": "15788",
+                "baidu_coord": " ",
+                "tao": "2466"
+            },
+            {
+                "id": 97,
+                "projname": "莞城",
+                "x": 113.75749206543,
+                "y": 23.059717178345,
+                "price": "12328",
+                "baidu_coord": " ",
+                "tao": "449"
+            },
+            {
+                "id": 100,
+                "projname": "万江",
+                "x": 113.74373626709,
+                "y": 23.053316116333,
+                "price": "11722",
+                "baidu_coord": " ",
+                "tao": "340"
+            },
+            {
+                "id": 104,
+                "projname": "常平",
+                "x": 113.99951171875,
+                "y": 22.981046676636,
+                "price": "12306",
+                "baidu_coord": " ",
+                "tao": "1216"
+            },
+            {
+                "id": 101,
+                "projname": "虎门",
+                "x": 113.67932128906,
+                "y": 22.820648193359,
+                "price": "13043",
+                "baidu_coord": " ",
+                "tao": "1078"
+            },
+            {
+                "id": 803,
+                "projname": "黄江",
+                "x": 114.00840759277,
+                "y": 22.921285629272,
+                "price": "15973",
+                "baidu_coord": " ",
+                "tao": "525"
+            },
+            {
+                "id": 103,
+                "projname": "樟木头",
+                "x": 114.08978271484,
+                "y": 22.920827865601,
+                "price": "11434",
+                "baidu_coord": " ",
+                "tao": "1312"
+            },
+            {
+                "id": 110,
+                "projname": "塘厦",
+                "x": 114.07553100586,
+                "y": 22.813053131104,
+                "price": "18312",
+                "baidu_coord": " ",
+                "tao": "1732"
+            },
+            {
+                "id": 108,
+                "projname": "凤岗",
+                "x": 114.1547164917,
+                "y": 22.749816894531,
+                "price": "22563",
+                "baidu_coord": " ",
+                "tao": "1543"
+            },
+            {
+                "id": 102,
+                "projname": "厚街",
+                "x": 113.67679595947,
+                "y": 22.94132232666,
+                "price": "15539",
+                "baidu_coord": " ",
+                "tao": "898"
+            },
+            {
+                "id": 801,
+                "projname": "沙田",
+                "x": 113.62408447266,
+                "y": 22.925270080566,
+                "price": "16420",
+                "baidu_coord": " ",
+                "tao": "394"
+            },
+            {
+                "id": 117,
+                "projname": "大朗",
+                "x": 113.95058441162,
+                "y": 22.945657730103,
+                "price": "13745",
+                "baidu_coord": " ",
+                "tao": "578"
+            },
+            {
+                "id": 121,
+                "projname": "大岭山",
+                "x": 113.80935668945,
+                "y": 22.868032455444,
+                "price": "17757",
+                "baidu_coord": " ",
+                "tao": "555"
+            },
+            {
+                "id": 802,
+                "projname": "寮步",
+                "x": 113.8812713623,
+                "y": 23.003709793091,
+                "price": "16158",
+                "baidu_coord": " ",
+                "tao": "872"
+            },
+            {
+                "id": 107,
+                "projname": "石龙",
+                "x": 113.88072967529,
+                "y": 23.111614227295,
+                "price": "10785",
+                "baidu_coord": " ",
+                "tao": "413"
+            },
+            {
+                "id": 927,
+                "projname": "松山湖",
+                "x": 113.87170410156,
+                "y": 22.89933013916,
+                "price": "27328",
+                "baidu_coord": " ",
+                "tao": "861"
+            },
+            {
+                "id": 795,
+                "projname": "中堂",
+                "x": 113.66393280029,
+                "y": 23.098642349243,
+                "price": "13276",
+                "baidu_coord": " ",
+                "tao": "80"
+            },
+            {
+                "id": 810,
+                "projname": "石排",
+                "x": 113.94654846191,
+                "y": 23.09485244751,
+                "price": "12832",
+                "baidu_coord": " ",
+                "tao": "143"
+            },
+            {
+                "id": 800,
+                "projname": "道滘",
+                "x": 113.68171691895,
+                "y": 23.010246276855,
+                "price": "14579",
+                "baidu_coord": " ",
+                "tao": "327"
+            },
+            {
+                "id": 106,
+                "projname": "石碣",
+                "x": 113.81981658936,
+                "y": 23.105007171631,
+                "price": "10354",
+                "baidu_coord": " ",
+                "tao": "279"
+            },
+            {
+                "id": 807,
+                "projname": "横沥",
+                "x": 113.97299194336,
+                "y": 23.024808883667,
+                "price": "9615",
+                "baidu_coord": " ",
+                "tao": "226"
+            },
+            {
+                "id": 797,
+                "projname": "麻涌",
+                "x": 113.58837890625,
+                "y": 23.057083129883,
+                "price": "13975",
+                "baidu_coord": " ",
+                "tao": "210"
+            },
+            {
+                "id": 804,
+                "projname": "谢岗",
+                "x": 114.15514373779,
+                "y": 22.967212677002,
+                "price": "11225",
+                "baidu_coord": " ",
+                "tao": "43"
+            },
+            {
+                "id": 806,
+                "projname": "桥头",
+                "x": 114.10960388184,
+                "y": 23.030078887939,
+                "price": "11153",
+                "baidu_coord": " ",
+                "tao": "208"
+            },
+            {
+                "id": 796,
+                "projname": "望牛墩",
+                "x": 113.66263580322,
+                "y": 23.061597824097,
+                "price": "11847",
+                "baidu_coord": " ",
+                "tao": "79"
+            },
+            {
+                "id": 805,
+                "projname": "清溪",
+                "x": 114.17089080811,
+                "y": 22.8503074646,
+                "price": "15118",
+                "baidu_coord": " ",
+                "tao": "283"
+            },
+            {
+                "id": 809,
+                "projname": "企石",
+                "x": 114.02853393555,
+                "y": 23.079036712646,
+                "price": "13671",
+                "baidu_coord": " ",
+                "tao": "52"
+            },
+            {
+                "id": 799,
+                "projname": "洪梅",
+                "x": 113.61544036865,
+                "y": 23.000642776489,
+                "price": "15129",
+                "baidu_coord": " ",
+                "tao": "66"
+            },
+            {
+                "id": 798,
+                "projname": "高埗",
+                "x": 113.75235748291,
+                "y": 23.097238540649,
+                "price": "12389",
+                "baidu_coord": " ",
+                "tao": "98"
+            },
+            {
+                "id": 808,
+                "projname": "东坑",
+                "x": 113.95465087891,
+                "y": 22.995094299316,
+                "price": "12768",
+                "baidu_coord": " ",
+                "tao": "189"
+            },
+            {
+                "id": 811,
+                "projname": "茶山",
+                "x": 113.87561798096,
+                "y": 23.08247756958,
+                "price": "13723",
+                "baidu_coord": " ",
+                "tao": "276"
+            },
+            {
+                "id": 13485,
+                "projname": "东莞周边",
+                "x": 114.06594848633,
+                "y": 22.548698425293,
+                "price": "10855",
+                "baidu_coord": " ",
+                "tao": "23"
+            }
+        ]
+    },
+    "list": "<div class=\"searchResult bt_none\"><div class=\"priceTrends\"><h3><span>16336</span>元/㎡</h3><p>环比上月 <span class=\"down\"><u></u>-2.0%</span></p></div><div class=\"houseNum subWay1\"><h3>东莞</h3><p>共20881套房源</p></div></div><div class=\"mapList\"><div id=\"scrollbar1\"><div class=\"scrollbar\"><div class=\"content1\"><div class=\"houselistwrap\"><div class=\"scrollf \"><div class=\"houseList\" type_id=\"loupan\"><div class=\"arealist\"><ul id=\"esf_E01_47\"><li><a class=\"floatArea\" data_id=\"99\" data_x=\"113.75064086914\" data_y=\"23.024320602417\"><span class=\"floatl\">南城</span><span class=\"floatr num\">2229套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"105\" data_x=\"113.80903625488\" data_y=\"22.821039199829\"><span class=\"floatl\">长安</span><span class=\"floatr num\">837套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"98\" data_x=\"113.78968811035\" data_y=\"23.034345626831\"><span class=\"floatl\">东城</span><span class=\"floatr num\">2466套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"97\" data_x=\"113.75749206543\" data_y=\"23.059717178345\"><span class=\"floatl\">莞城</span><span class=\"floatr num\">449套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"100\" data_x=\"113.74373626709\" data_y=\"23.053316116333\"><span class=\"floatl\">万江</span><span class=\"floatr num\">340套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"104\" data_x=\"113.99951171875\" data_y=\"22.981046676636\"><span class=\"floatl\">常平</span><span class=\"floatr num\">1216套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"101\" data_x=\"113.67932128906\" data_y=\"22.820648193359\"><span class=\"floatl\">虎门</span><span class=\"floatr num\">1078套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"803\" data_x=\"114.00840759277\" data_y=\"22.921285629272\"><span class=\"floatl\">黄江</span><span class=\"floatr num\">525套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"103\" data_x=\"114.08978271484\" data_y=\"22.920827865601\"><span class=\"floatl\">樟木头</span><span class=\"floatr num\">1312套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"110\" data_x=\"114.07553100586\" data_y=\"22.813053131104\"><span class=\"floatl\">塘厦</span><span class=\"floatr num\">1732套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"108\" data_x=\"114.1547164917\" data_y=\"22.749816894531\"><span class=\"floatl\">凤岗</span><span class=\"floatr num\">1543套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"102\" data_x=\"113.67679595947\" data_y=\"22.94132232666\"><span class=\"floatl\">厚街</span><span class=\"floatr num\">898套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"801\" data_x=\"113.62408447266\" data_y=\"22.925270080566\"><span class=\"floatl\">沙田</span><span class=\"floatr num\">394套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"117\" data_x=\"113.95058441162\" data_y=\"22.945657730103\"><span class=\"floatl\">大朗</span><span class=\"floatr num\">578套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"121\" data_x=\"113.80935668945\" data_y=\"22.868032455444\"><span class=\"floatl\">大岭山</span><span class=\"floatr num\">555套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"802\" data_x=\"113.8812713623\" data_y=\"23.003709793091\"><span class=\"floatl\">寮步</span><span class=\"floatr num\">872套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"107\" data_x=\"113.88072967529\" data_y=\"23.111614227295\"><span class=\"floatl\">石龙</span><span class=\"floatr num\">413套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"927\" data_x=\"113.87170410156\" data_y=\"22.89933013916\"><span class=\"floatl\">松山湖</span><span class=\"floatr num\">861套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"795\" data_x=\"113.66393280029\" data_y=\"23.098642349243\"><span class=\"floatl\">中堂</span><span class=\"floatr num\">80套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"810\" data_x=\"113.94654846191\" data_y=\"23.09485244751\"><span class=\"floatl\">石排</span><span class=\"floatr num\">143套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"800\" data_x=\"113.68171691895\" data_y=\"23.010246276855\"><span class=\"floatl\">道滘</span><span class=\"floatr num\">327套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"106\" data_x=\"113.81981658936\" data_y=\"23.105007171631\"><span class=\"floatl\">石碣</span><span class=\"floatr num\">279套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"807\" data_x=\"113.97299194336\" data_y=\"23.024808883667\"><span class=\"floatl\">横沥</span><span class=\"floatr num\">226套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"797\" data_x=\"113.58837890625\" data_y=\"23.057083129883\"><span class=\"floatl\">麻涌</span><span class=\"floatr num\">210套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"804\" data_x=\"114.15514373779\" data_y=\"22.967212677002\"><span class=\"floatl\">谢岗</span><span class=\"floatr num\">43套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"806\" data_x=\"114.10960388184\" data_y=\"23.030078887939\"><span class=\"floatl\">桥头</span><span class=\"floatr num\">208套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"796\" data_x=\"113.66263580322\" data_y=\"23.061597824097\"><span class=\"floatl\">望牛墩</span><span class=\"floatr num\">79套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"805\" data_x=\"114.17089080811\" data_y=\"22.8503074646\"><span class=\"floatl\">清溪</span><span class=\"floatr num\">283套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"809\" data_x=\"114.02853393555\" data_y=\"23.079036712646\"><span class=\"floatl\">企石</span><span class=\"floatr num\">52套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"799\" data_x=\"113.61544036865\" data_y=\"23.000642776489\"><span class=\"floatl\">洪梅</span><span class=\"floatr num\">66套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"798\" data_x=\"113.75235748291\" data_y=\"23.097238540649\"><span class=\"floatl\">高埗</span><span class=\"floatr num\">98套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"808\" data_x=\"113.95465087891\" data_y=\"22.995094299316\"><span class=\"floatl\">东坑</span><span class=\"floatr num\">189套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"811\" data_x=\"113.87561798096\" data_y=\"23.08247756958\"><span class=\"floatl\">茶山</span><span class=\"floatr num\">276套<span class=\"rightarrow\"></span></span></a></li><li><a class=\"floatArea\" data_id=\"13485\" data_x=\"114.06594848633\" data_y=\"22.548698425293\"><span class=\"floatl\">东莞周边</span><span class=\"floatr num\">23套<span class=\"rightarrow\"></span></span></a></li></ul></div></div></div></div></div></div></div></div>"
+}
