@@ -1,0 +1,168 @@
+body,
+html,
+#allmap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    font-family: "微软雅黑";
+}
+div,
+form,
+ul,
+ol,
+li,
+span,
+p,
+dl,
+dt,
+dd {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+img,
+a img {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
+
+ul,
+ol,
+li {
+    list-style: none
+}
+
+table,
+td,
+input {
+    font-size: 12px;
+    padding: 0;
+    font-family: inherit;
+}
+
+.lpNum>li {
+    position: absolute;
+    overflow: hidden;
+    z-index: 7;
+    width: 74px;
+    height: 74px;
+    background: url(/img/map-circleBg.png) no-repeat -1px -1px;
+}
+
+.lpNum>li>a {
+    display: block;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    line-height: 18px;
+    margin-top: 8px;
+}
+
+.lpNum>li:hover,
+.lpPrice>li:hover {
+    background-position: 0px -88px;
+}
+
+.lpNum>li.on,
+.lpPrice>li.on {
+    background-position: -1px -175px;
+}
+
+.lpTip {
+    left: 50%;
+    top: 15%;
+}
+
+.lpTip {
+    position: absolute;
+}
+
+.lpTip>a {
+    display: block;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 3px;
+    background-color: #f14646;
+    padding: 0 14px;
+    font-size: 13px;
+    color: #fff;
+    position: relative;
+    white-space: nowrap;
+    overflow: visible;
+    opacity: 0.9;
+    filter: Alpha(opacity=90);
+}
+
+.lpTip>a>div {
+    width: 0;
+    height: 0;
+    border-top: 6px solid #f14646;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    position: absolute;
+    top: 28px;
+    left: 44%;
+}
+
+.lpTip span {
+    position: absolute;
+    display: none;
+    left: 100%;
+    top: 0;
+    white-space: nowrap;
+    height: 28px;
+    line-height: 28px;
+    background: url(/img/gang_ditu.png) no-repeat left center #199752;
+    padding: 0px 14px 0 7px;
+    font-size: 13px;
+    color: #ffffff;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.lpTip>li>a {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.lpTip>a:hover {
+    background-color: #199752;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-right: 6px;
+}
+
+.lpTip>a:hover>div {
+    border-top-color: #199752;
+    left: 47.2%;
+}
+
+.lpTip>a:hover>span.dis {
+    display: block;
+}
+
+.lpTip>a.on {
+    background-color: #ff9e92;
+}
+
+.lpTip:hover span {
+    display: block;
+}
