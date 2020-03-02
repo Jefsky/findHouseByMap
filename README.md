@@ -31,6 +31,8 @@
 `https://dg.esf.fang.com/map/?mapmode=y&district=800&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=113.515279&y1=22.97771&x2=113.791238&y2=23.042775&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=14&a=ajaxSearch&city=dg&searchtype=`
 * 地区楼盘接口
 `https://dg.esf.fang.com/map/?mapmode=y&district=100&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=17408&orderby=30&isyouhui=&x1=113.67489&y1=23.008064&x2=113.74388&y2=23.02433&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=16&a=ajaxSearch&city=dg&searchtype=loupan`
+* 拖拽
+`https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=113.804792&y1=23.037902&x2=113.873782&y2=23.057623&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=16&a=ajaxSearch&city=dg&searchtype=other`
 
 ## 小程序 
 腾讯地图

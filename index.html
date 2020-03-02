@@ -15,8 +15,178 @@
             font-family: "微软雅黑";
         }
     </style>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=wjugk4K7tYpHO6RUQyzZBMKx3DPUcmVM"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rUoqq66ovAVG4y9FN6WvaQxznUMz8tsN"></script>
     <title>地图找房</title>
+    <style>
+        body {
+            font-family: "微软雅黑", "Arial";
+            margin: 0 auto;
+            padding: 0;
+            font-size: 12px;
+            color: #333;
+            /* background: #f7f7f7; */
+        }
+        
+        div,
+        form,
+        ul,
+        ol,
+        li,
+        span,
+        p,
+        dl,
+        dt,
+        dd {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        img,
+        a img {
+            border: 0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+        }
+        
+        ul,
+        ol,
+        li {
+            list-style: none
+        }
+        
+        table,
+        td,
+        input {
+            font-size: 12px;
+            padding: 0;
+            font-family: inherit;
+        }
+        
+        .lpNum>li {
+            position: absolute;
+            overflow: hidden;
+            z-index: 7;
+            width: 74px;
+            height: 74px;
+            background: url(./img/map-circleBg.png) no-repeat -1px -1px;
+        }
+        
+        .lpNum>li>a {
+            display: block;
+            font-size: 12px;
+            color: #fff;
+            text-align: center;
+            line-height: 18px;
+            margin-top: 8px;
+        }
+        
+        .lpNum>li:hover,
+        .lpPrice>li:hover {
+            background-position: 0px -88px;
+        }
+        
+        .lpNum>li.on,
+        .lpPrice>li.on {
+            background-position: -1px -175px;
+        }
+        
+        .lpTip {
+            left: 50%;
+            top: 15%;
+        }
+        
+        .lpTip {
+            position: absolute;
+        }
+        
+        .lpTip>a {
+            display: block;
+            height: 28px;
+            line-height: 28px;
+            border-radius: 3px;
+            background-color: #f14646;
+            padding: 0 14px;
+            font-size: 13px;
+            color: #fff;
+            position: relative;
+            white-space: nowrap;
+            overflow: visible;
+            opacity: 0.9;
+            filter: Alpha(opacity=90);
+        }
+        
+        .lpTip>a>div {
+            width: 0;
+            height: 0;
+            border-top: 6px solid #f14646;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            position: absolute;
+            top: 28px;
+            left: 44%;
+        }
+        
+        .lpTip span {
+            position: absolute;
+            display: none;
+            left: 100%;
+            top: 0;
+            white-space: nowrap;
+            height: 28px;
+            line-height: 28px;
+            background: url(img/gang_ditu.png) no-repeat left center #199752;
+            padding: 0px 14px 0 7px;
+            font-size: 13px;
+            color: #ffffff;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+        
+        .lpTip>li>a {
+            display: block;
+            height: 20px;
+            line-height: 20px;
+            padding: 0 10px;
+            font-size: 12px;
+            color: #fff;
+        }
+        
+        .lpTip>a:hover {
+            background-color: #199752;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            padding-right: 6px;
+        }
+        
+        .lpTip>a:hover>div {
+            border-top-color: #199752;
+            left: 47.2%;
+        }
+        
+        .lpTip>a:hover>span.dis {
+            display: block;
+        }
+        
+        .lpTip>a.on {
+            background-color: #ff9e92;
+        }
+        
+        .lpTip:hover span {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,16 +200,22 @@
     // $.getJSON('data-area.json', function(data) {
     //     console.log(data);
     // });
-
+    var searchtype = '';
     var map = new BMap.Map("allmap");
     var point = new BMap.Point(113.720287, 23.020079);
     map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
     map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
+    map.addControl(new BMap.NavigationControl()); // 添加平移缩放控件
+    map.addControl(new BMap.ScaleControl()); // 添加比例尺控件
+    map.addControl(new BMap.OverviewMapControl()); //添加缩略地图控件
+    map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
     map.centerAndZoom(point, 12);
-    var geolocation = new BMap.Geolocation(); //返回用户当前的位置
-    geolocation.getCurrentPosition(function(e) {
-        console.log(e)
-    })
+    map.setMinZoom(12);
+    map.setMaxZoom(18);
+    $.getJSON('data-town.json', function(data) {
+        drawCircle(data);
+        console.log('town')
+    });
 
 
     // 定义构造函数并继承Overlay
@@ -52,44 +228,7 @@
     // 继承API BMap.Overlay
     CustomOverlay.prototype = new BMap.Overlay();
 
-    // 初始化自定义覆盖物
-    CustomOverlay.prototype.initialize = function(map) {
-        // 保存map对象实例
-        this._map = map;
-        // 创建div元素，作为自定义覆盖物的容器
-        var div = document.createElement("div");
-        div.style.position = 'absolute';
-        // 根据参数设置元素外观
-        div.style.background = "red";
-        div.style.MozUserSelect = 'none';
-        div.style.borderRadius = "100%";
-        div.style.height = '74px';
-        div.style.width = '74px';
 
-        var sonDiv = document.createElement("div");
-        $(sonDiv).css({
-            "height": "74px",
-            "width": "74px"
-        });
-        $(sonDiv).append('<a style="height:74px;width:74px;display:block;font-size:12px;color:#fff;text-align:center;line-height:18px;margin-top:8px;">' + this._name + this._text + '</a>')
-
-        div.appendChild(sonDiv);
-        $(div).mousemove(function() {
-            $(this).css("z-index", "999999");
-            $(this).css("background", "green");
-        });
-        $(div).mouseout(function() {
-            $(this).css("background", "red");
-        });
-
-        // 将div添加到覆盖物容器中
-        map.getPanes().markerPane.appendChild(div);
-        // 保存div实例
-        this._div = div;
-        // 需要将div元素作为方法的返回值，当调用该覆盖物的show、
-        // hide方法，或者对覆盖物进行移除时，API都将操作此元素
-        return div;
-    }
 
     // 绘制覆盖物
     CustomOverlay.prototype.draw = function() {
@@ -114,8 +253,51 @@
     }
 
 
-    function buildBaiduMap(result) {
-        // 创建Map实例
+    // 画圆
+    function drawCircle(result) {
+        // 初始化自定义覆盖物
+        CustomOverlay.prototype.initialize = function(map) {
+                // 保存map对象实例
+                this._map = map;
+                // 创建div元素，作为自定义覆盖物的容器
+                var div = document.createElement("div");
+                div.style.position = 'absolute';
+                // 根据参数设置元素外观
+                div.style.background = "red";
+                div.style.MozUserSelect = 'none';
+                div.style.borderRadius = "100%";
+                div.style.height = '74px';
+                div.style.width = '74px';
+                div.style.zIndex = '2147483647';
+                div.style.cursor = 'pointer';
+
+                var son = document.createElement("ul");
+                $(son).addClass('lpNum');
+                $(son).css({
+                    'width': '74px',
+                    'height': '74px',
+                    'display': 'block',
+                    'z-index': '2147483647',
+                    'position': 'absolute'
+                });
+
+                $(son).append('<li><a >' + this._name + this._text + '</a></li>')
+
+                div.appendChild(son);
+                $(div).mousemove(function() {
+                    $(this).css("z-index", "999999");
+                });
+                $(div).mouseout(function() {});
+
+                // 将div添加到覆盖物容器中
+                map.getPanes().markerPane.appendChild(div);
+                // 保存div实例
+                this._div = div;
+                // 需要将div元素作为方法的返回值，当调用该覆盖物的show、
+                // hide方法，或者对覆盖物进行移除时，API都将操作此元素
+                return div;
+            }
+            // 创建Map实例
         var pointArray = [];
         for (var i = 0; i < result.loupan.hit.length; i++) {
             var sub = result.loupan.hit[i];
@@ -132,41 +314,164 @@
         // map.setViewport(pointArray);
     }
 
-    $(function() {
+    //画矩形(样式未写好)
+    function drawRectangle(result) {
+        // 初始化自定义覆盖物
+        CustomOverlay.prototype.initialize = function(map) {
+                // 保存map对象实例
+                this._map = map;
+                // 创建div元素，作为自定义覆盖物的容器
+                var div = document.createElement("div");
+                div.style.position = 'absolute';
 
-    })
-    $(document).on('mousewheel DOMMouseScroll', onMouseScroll);
+                var sonDiv = document.createElement("div");
+                $(sonDiv).addClass('lpTip');
+                $(sonDiv).append('<a>' + this._text + '<div></div> <span class="dis" style="display: none;">' + this._name + '</span></a>')
+
+                div.appendChild(sonDiv);
+                $(div).mousemove(function() {
+                    $(this).css("z-index", "999999");
+                    $(this).find('.dis').css('display', 'block');
+                });
+                $(div).mouseout(function() {
+                    $(this).find('.dis').hide();
+                });
+
+                // 将div添加到覆盖物容器中
+                map.getPanes().markerPane.appendChild(div);
+                // 保存div实例
+                this._div = div;
+                // 需要将div元素作为方法的返回值，当调用该覆盖物的show、
+                // hide方法，或者对覆盖物进行移除时，API都将操作此元素
+                return div;
+            }
+            // 创建Map实例
+        var pointArray = [];
+        for (var i = 0; i < result.loupan.hit.length; i++) {
+            var sub = result.loupan.hit[i];
+            var longitude = sub['x'];
+            var latitude = sub['y'];
+            var name = '| ' + sub['projname'];
+            var text = sub['price'] + '元/㎡' + sub['tao'] + '套';
+            var point = new BMap.Point(longitude, latitude);
+            var marker = new CustomOverlay(point, name, text);
+            pointArray.push(point);
+            map.addOverlay(marker);
+        }
+        //让所有点在视野范围内
+        // map.setViewport(pointArray);
+    }
 
 
-    function onMouseScroll() {
+    // $(function() {
+
+    // })
+
+    /**
+     * 地图操作
+     * 
+     **/
+    //缩放操作
+    map.addEventListener("zoomend", function(evt) {   
+
+        var  offsetPoint = new  BMap.Pixel(evt.offsetX, evt.offsetY);   //记录鼠标当前点坐标
         var zoom = map.getZoom();
+        var bounds = map.getBounds();
         console.log(zoom)
         switch (zoom) {
             case 10:
             case 11:
             case 12:
                 map.clearOverlays();
-                $.getJSON('data-town.json', function(data) {
-                    buildBaiduMap(data);
+                $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=' + bounds.Le + '&y1=' + bounds.Xd + '&x2=' + bounds.He + '&y2=' + bounds.Vd + '&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=dg&searchtype=' + searchtype, function(data) {
+                    drawCircle(data);
                     console.log('town')
                 });
                 break;
             case 13:
             case 14:
                 map.clearOverlays();
-                $.getJSON('data-area.json', function(data) {
-                    buildBaiduMap(data);
+                $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=' + bounds.Le + '&y1=' + bounds.Xd + '&x2=' + bounds.He + '&y2=' + bounds.Vd + '&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=dg&searchtype=' + searchtype, function(data) {
+                    drawCircle(data);
                     console.log('area')
                 });
                 break;
             case 15:
             case 16:
+            case 17:
+            case 18:
                 map.clearOverlays();
-                $.getJSON('data-estate.json', function(data) {
-                    buildBaiduMap(data);
-                    console.log('area')
+                $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=' + bounds.Le + '&y1=' + bounds.Xd + '&x2=' + bounds.He + '&y2=' + bounds.Vd + '&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=dg&searchtype=' + searchtype, function(data) {
+                    drawRectangle(data);
+                    console.log('estate')
                 });
                 break;
         }
-    }
+    });
+
+
+
+
+    //拖拽操作
+    var geolocation = new BMap.Geolocation(); //返回用户当前的位置
+
+    geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() === BMAP_STATUS_SUCCESS) { //调用成功
+            map.panTo(r.point);
+            // map.centerAndZoom(r.point, 15);
+            var centerPixel = map.pointToOverlayPixel(map.getCenter());
+            //通过设置地图的中心点，使定位点显示在手机上部分区域
+            map.setCenter(map.overlayPixelToPoint({
+                x: centerPixel.x,
+                y: centerPixel.y
+            }));
+            map.addEventListener('dragend', function() {
+                //获得移动之后地图中心点的像素位置
+                var pixel = map.pointToOverlayPixel(map.getCenter());
+                //获得定位图标所在位置在地图上的地理位置，
+                //实际上定位图标的像素位置就在地图中心像素位置相应的偏移量处
+                var Point = map.overlayPixelToPoint({
+                    x: pixel.x,
+                    y: pixel.y
+                });
+                console.info('当前位置', Point);
+                var zoom = map.getZoom();
+                var searchtype = ''
+                switch (zoom) {
+                    case 10:
+                    case 11:
+                    case 12:
+                        searchtype = 'city';
+                        break;
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                        searchtype = 'loupan';
+                        break;
+                }
+                var bounds = map.getBounds();
+                console.log('可视区域', bounds);
+                $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=' + bounds.Le + '&y1=' + bounds.Xd + '&x2=' + bounds.He + '&y2=' + bounds.Vd + '&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=dg&searchtype=' + searchtype, function(data) {
+                    switch (zoom) {
+                        case 15:
+                        case 16:
+                        case 17:
+                        case 18:
+                            console.log('drawRectangle')
+                            map.clearOverlays();
+                            drawRectangle(data);
+                            break;
+                        default:
+                            map.clearOverlays();
+                            drawCircle(data);
+                    }
+                });
+            });
+        } else {
+            alert('failed' + this.getStatus());
+        }
+    });
 </script>
