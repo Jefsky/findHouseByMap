@@ -20,10 +20,11 @@ $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwayst
 
 
 // 定义构造函数并继承Overlay
-function CustomOverlay(center, name, text) {
+function CustomOverlay(center, name, text, comarea) {
     this._center = center;
     this._name = name;
     this._text = text;
+    this._comarea = comarea;
 }
 
 // 继承API BMap.Overlay
@@ -78,11 +79,13 @@ function drawCircle(data) {
                 'position': 'absolute'
             });
 
-            $(son).append('<li><a >' + this._name + this._text + '</a></li>')
+            $(son).append('<li><a data-comarea="' + this._comarea + '">' + this._name + this._text + '</a></li>');
 
+            var that = this;
             div.appendChild(son);
             $(div).mousemove(function() {
                 $(this).css("z-index", "999999");
+                getBoundary(that._comarea);
             });
             $(div).mouseout(function() {
                 $(this).css("z-index", "999900");
@@ -105,8 +108,9 @@ function drawCircle(data) {
         var latitude = sub['y'];
         var name = sub['projname'];
         var text = '<br>' + sub['price'] + '元/㎡<br>' + sub['tao'] + '套';
+        var comarea = sub['baidu_coord'];
         var point = new BMap.Point(longitude, latitude);
-        var marker = new CustomOverlay(point, name, text);
+        var marker = new CustomOverlay(point, name, text, comarea);
         // pointArray.push(point);
         map.addOverlay(marker);
     }
@@ -124,11 +128,11 @@ function drawRectangle(data) {
             var div = document.createElement("div");
             div.style.position = 'absolute';
 
-            var sonDiv = document.createElement("div");
-            $(sonDiv).addClass('lpTip');
-            $(sonDiv).append('<a>' + this._text + '<div></div> <span class="dis" style="display: none;">' + this._name + '</span></a>')
+            var son = document.createElement("div");
+            $(son).addClass('lpTip');
+            $(son).append('<a>' + this._text + '<div></div> <span class="dis" style="display: none;">' + this._name + '</span></a>');
 
-            div.appendChild(sonDiv);
+            div.appendChild(son);
             $(div).mousemove(function() {
                 $(this).css("z-index", "999999");
                 $(this).find('.dis').css('display', 'block');
@@ -163,6 +167,22 @@ function drawRectangle(data) {
     //让所有点在视野范围内
     // map.setViewport(pointArray);
 }
+
+//画行政区域
+function getBoundary(data) {
+    var boundaries = data.split(",");
+    var count = boundaries.length; //行政区域的点有多少个
+    if (count < 1) {
+        return false;
+    }
+    var pointArray = [];
+    for (var i = 0; i < count; i++) {
+        var ply = new BMap.Polygon(boundaries[i], { strokeWeight: 2, strokeColor: "#f00", fillColor: "#f33", fillOpacity: .1 }); //建立多边形覆盖物
+        map.addOverlay(ply); //添加覆盖物
+        pointArray = pointArray.concat(ply.getPath());
+    }
+}
+
 
 /**
  * 地图操作
