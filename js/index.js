@@ -18,7 +18,6 @@ $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwayst
     console.log('town')
 });
 
-
 // 定义构造函数并继承Overlay
 function CustomOverlay(center, name, text, comarea) {
     this._center = center;
@@ -52,7 +51,7 @@ CustomOverlay.prototype.hide = function() {
     }
 }
 
-// 画圆
+// 绘制圆形覆盖物
 function drawCircle(data) {
     // 初始化自定义覆盖物
     CustomOverlay.prototype.initialize = function(map) {
@@ -82,13 +81,19 @@ function drawCircle(data) {
             $(son).append('<li><a data-comarea="' + this._comarea + '">' + this._name + this._text + '</a></li>');
 
             var that = this;
+            var plylist = [];
             div.appendChild(son);
-            $(div).mousemove(function() {
+            $(div).mouseover(function() {
                 $(this).css("z-index", "999999");
-                getBoundary(that._comarea);
+                if (this._comarea !== ' ') {
+                    plylist = addBoundary(that._comarea);
+                }
             });
             $(div).mouseout(function() {
                 $(this).css("z-index", "999900");
+                if (this._comarea != ' ') {
+                    removeBoundary(plylist);
+                }
             });
 
             // 将div添加到覆盖物容器中
@@ -100,7 +105,6 @@ function drawCircle(data) {
             return div;
         }
         // 创建Map实例
-        // var pointArray = [];
     if (typeof(data.loupan.hit) == 'undefined') { return false };
     for (var i = 0; i < data.loupan.hit.length; i++) {
         var sub = data.loupan.hit[i];
@@ -111,14 +115,11 @@ function drawCircle(data) {
         var comarea = sub['baidu_coord'];
         var point = new BMap.Point(longitude, latitude);
         var marker = new CustomOverlay(point, name, text, comarea);
-        // pointArray.push(point);
         map.addOverlay(marker);
     }
-    //让所有点在视野范围内
-    // map.setViewport(pointArray);
 }
 
-//画矩形(样式未写好)
+//绘制矩形覆盖物
 function drawRectangle(data) {
     // 初始化自定义覆盖物
     CustomOverlay.prototype.initialize = function(map) {
@@ -133,7 +134,7 @@ function drawRectangle(data) {
             $(son).append('<a>' + this._text + '<div></div> <span class="dis" style="display: none;">' + this._name + '</span></a>');
 
             div.appendChild(son);
-            $(div).mousemove(function() {
+            $(div).mouseover(function() {
                 $(this).css("z-index", "999999");
                 $(this).find('.dis').css('display', 'block');
             });
@@ -151,7 +152,6 @@ function drawRectangle(data) {
             return div;
         }
         // 创建Map实例
-        // var pointArray = [];
     if (typeof(data.loupan.hit) == 'undefined') { return false };
     for (var i = 0; i < data.loupan.hit.length; i++) {
         var sub = data.loupan.hit[i];
@@ -161,28 +161,21 @@ function drawRectangle(data) {
         var text = sub['price'] + '元/㎡' + sub['tao'] + '套';
         var point = new BMap.Point(longitude, latitude);
         var marker = new CustomOverlay(point, name, text);
-        // pointArray.push(point);
         map.addOverlay(marker);
     }
-    //让所有点在视野范围内
-    // map.setViewport(pointArray);
 }
 
-//画行政区域
-function getBoundary(data) {
-    var boundaries = data.split(",");
-    var count = boundaries.length; //行政区域的点有多少个
-    if (count < 1) {
-        return false;
-    }
-    var pointArray = [];
-    for (var i = 0; i < count; i++) {
-        var ply = new BMap.Polygon(boundaries[i], { strokeWeight: 2, strokeColor: "#f00", fillColor: "#f33", fillOpacity: .1 }); //建立多边形覆盖物
-        map.addOverlay(ply); //添加覆盖物
-        pointArray = pointArray.concat(ply.getPath());
-    }
+//绘制区划
+function addBoundary(data) {
+    var ply = new BMap.Polygon(data, { strokeWeight: 2, strokeColor: "#f00", fillColor: "#f33", fillOpacity: .1 });
+    map.addOverlay(ply);
+    return ply;
 }
 
+//移除区划
+function removeBoundary(data) {
+    map.removeOverlay(data);
+}
 
 /**
  * 地图操作
@@ -225,12 +218,8 @@ map.addEventListener("zoomend", function(evt) {
     }
 });
 
-
-
-
 //拖拽操作
 var geolocation = new BMap.Geolocation(); //返回用户当前的位置
-
 geolocation.getCurrentPosition(function(r) {
     if (this.getStatus() === BMAP_STATUS_SUCCESS) { //调用成功
         map.panTo(r.point);
