@@ -51,6 +51,10 @@ CustomOverlay.prototype.hide = function() {
     }
 }
 
+CustomOverlay.prototype.addEventListener("click", function() {
+    console.log(21212121221)
+})
+
 // 绘制圆形覆盖物
 function drawCircle(data) {
     // 初始化自定义覆盖物
@@ -78,7 +82,7 @@ function drawCircle(data) {
                 'position': 'absolute'
             });
 
-            $(son).append('<li><a data-comarea="' + this._comarea + '">' + this._name + this._text + '</a></li>');
+            $(son).append('<li><a data-zoneid="' + this._name + '" data-comarea="' + this._comarea + '">' + this._name + this._text + '</a></li>');
 
             var that = this;
             var plylist = [];
@@ -95,6 +99,8 @@ function drawCircle(data) {
                     removeBoundary(plylist);
                 }
             });
+
+
 
             // 将div添加到覆盖物容器中
             map.getPanes().markerPane.appendChild(div);
@@ -181,6 +187,7 @@ function removeBoundary(data) {
  * 地图操作
  * 
  **/
+
 //缩放操作
 map.addEventListener("zoomend", function(evt) {
     var offsetPoint = new BMap.Pixel(evt.offsetX, evt.offsetY);   //记录鼠标当前点坐标
@@ -278,3 +285,8 @@ geolocation.getCurrentPosition(function(r) {
         alert('failed' + this.getStatus());
     }
 });
+
+
+$('.lpNum').click(function() {
+    console.log('sasasas');
+})
