@@ -5,6 +5,7 @@
     * 缩放检索
     * 拖拽检索
     * 行政区域划分
+    * 点击覆盖物检索
 
 # 项目图示
     ![Image text](https://github.com/Jefsky/findHouseByMap/blob/master/img/20200305145548.png)
