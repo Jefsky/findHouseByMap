@@ -1,8 +1,8 @@
-// 百度地图API功能  rUoqq66ovAVG4y9FN6WvaQxznUMz8tsN
+// 百度地图API功能  08HppseHkx93WlQMpEzWGRUgF971DaD9
 
 var searchtype = ''; //检索类型
 var map = new BMap.Map("allmap");
-var point = new BMap.Point(113.910584, 23.070095); //地图中心
+var point = new BMap.Point(113.936456, 23.044025); //地图中心
 map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
 map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
 map.addControl(new BMap.NavigationControl()); // 添加平移缩放控件
@@ -12,18 +12,21 @@ map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
 map.centerAndZoom(point, 12); //地图默认缩放级别
 map.setMinZoom(12);
 map.setMaxZoom(18);
+var pointArray = [];
 var bounds = map.getBounds();
 $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=' + bounds.Le + '&y1=' + bounds.Xd + '&x2=' + bounds.He + '&y2=' + bounds.Vd + '&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=12&a=ajaxSearch&city=dg&searchtype=' + searchtype, function(data) {
     drawCircle(data);
     console.log('town')
+
 });
 
 // 定义构造函数并继承Overlay
-function CustomOverlay(center, name, text, comarea) {
+function CustomOverlay(center, name, text, comarea, id) {
     this._center = center;
     this._name = name;
     this._text = text;
     this._comarea = comarea;
+    this._id = id;
 }
 
 // 继承API BMap.Overlay
@@ -51,9 +54,6 @@ CustomOverlay.prototype.hide = function() {
     }
 }
 
-CustomOverlay.prototype.addEventListener("click", function() {
-    console.log(21212121221)
-})
 
 // 绘制圆形覆盖物
 function drawCircle(data) {
@@ -99,6 +99,26 @@ function drawCircle(data) {
                     removeBoundary(plylist);
                 }
             });
+            div.addEventListener("click", function(e) {
+                var zoom = map.getZoom();
+                map.clearOverlays();
+                switch (zoom) {
+                    case 15:
+                        $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=16&a=ajaxSearch&city=dg&searchtype=loupan', function(data) {
+                            drawCircle(data);
+                            console.log(that._center)
+                            map.centerAndZoom(that._center, 16); //地图默认缩放级别
+                        });
+                        break;
+                    default:
+                        $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=dg&searchtype=', function(data) {
+                            drawCircle(data);
+                            console.log(that._center)
+                            map.centerAndZoom(that._center, zoom + 3); //地图默认缩放级别
+                        });
+                }
+
+            })
 
 
 
@@ -112,6 +132,7 @@ function drawCircle(data) {
         }
         // 创建Map实例
     if (typeof(data.loupan.hit) == 'undefined') { return false };
+    var pointArray = [];
     for (var i = 0; i < data.loupan.hit.length; i++) {
         var sub = data.loupan.hit[i];
         var longitude = sub['x'];
@@ -120,9 +141,11 @@ function drawCircle(data) {
         var text = '<br>' + sub['price'] + '元/㎡<br>' + sub['tao'] + '套';
         var comarea = sub['baidu_coord'];
         var point = new BMap.Point(longitude, latitude);
-        var marker = new CustomOverlay(point, name, text, comarea);
+        var marker = new CustomOverlay(point, name, text, comarea, sub['id']);
+        pointArray.push(point);
         map.addOverlay(marker);
     }
+    // map.setViewport(pointArray);
 }
 
 //绘制矩形覆盖物
@@ -159,6 +182,7 @@ function drawRectangle(data) {
         }
         // 创建Map实例
     if (typeof(data.loupan.hit) == 'undefined') { return false };
+    // var pointArray = [];
     for (var i = 0; i < data.loupan.hit.length; i++) {
         var sub = data.loupan.hit[i];
         var longitude = sub['x'];
@@ -166,9 +190,11 @@ function drawRectangle(data) {
         var name = sub['projname'];
         var text = sub['price'] + '元/㎡' + sub['tao'] + '套';
         var point = new BMap.Point(longitude, latitude);
-        var marker = new CustomOverlay(point, name, text);
+        var marker = new CustomOverlay(point, name, text, sub['id']);
+        // pointArray.push(point);
         map.addOverlay(marker);
     }
+    // map.setViewport(pointArray);
 }
 
 //绘制区划
@@ -246,7 +272,7 @@ geolocation.getCurrentPosition(function(r) {
                 x: pixel.x,
                 y: pixel.y
             });
-            console.info('当前位置', Point);
+            console.info('当前位置', map.getCenter());
             var zoom = map.getZoom();
             var searchtype = ''
             switch (zoom) {
