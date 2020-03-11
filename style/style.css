@@ -61,7 +61,7 @@ input {
     z-index: 7;
     width: 74px;
     height: 74px;
-    background: url(/findHouseByMap/img/map-circleBg.png) no-repeat -1px -1px;
+    background: url(findHouseByMap/img/map-circleBg.png) no-repeat -1px -1px;
 }
 
 .lpNum>li>a {
