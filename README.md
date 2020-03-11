@@ -49,6 +49,7 @@ https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&pric
 
 * 接口样本
 https://dg.esf.fang.com/map/?mapmode=y&district=800&keyword=&orderby=30&x1=113.515279&y1=22.97771&x2=113.791238&y2=23.042775&groupedmode=4&PageNo=1&zoom=14&a=ajaxSearch&city=dg&searchtype=
+https://dg.newhouse.fang.com/house/s/list/?strDistrict=%E4%B8%AD%E5%A0%82&x1=&y1=&x2=&y2=&newCode=&houseNum=&schoolDist=&schoolid=&PageNo=1&zoom=14&city=dg&a=ajaxSearch&mapmode=
 
 ## 小程序 
 腾讯地图

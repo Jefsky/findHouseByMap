@@ -36,7 +36,7 @@ draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtyp
  * draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, form, click,centerAndZoom)
  */
 function draw(district, Le, Xd, He, Vd, zoom, city, searchtype, form, click, center, centerAndZoom) {
-    $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=' + district + '&keyword=&orderby=30&x1=' + Le + '&y1=' + Xd + '&x2=' + He + '&y2=' + Vd + '&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=' + city + '&searchtype=' + searchtype, function(data) {
+    $.getJSON('http://local.fzg360.com/index.php/house/ajax_map?mapmode=y&district=' + district + '&keyword=&orderby=30&x1=' + Le + '&y1=' + Xd + '&x2=' + He + '&y2=' + Vd + '&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=' + city + '&searchtype=' + searchtype, function(data) {
         if (form) {
             drawRectangle(data);
         } else {
@@ -162,7 +162,7 @@ function drawCircle(data) {
         var longitude = sub['x'];
         var latitude = sub['y'];
         var name = sub['projname'];
-        var text = '<br>' + sub['price'] + '元/㎡<br>' + sub['tao'] + '套';
+        var text = '<br>' + sub['price'] + '元/㎡<br>'; //+ sub['tao'] + '套';
         var comarea = sub['baidu_coord'];
         var point = new BMap.Point(longitude, latitude);
         var marker = new CustomOverlay(point, name, text, comarea, sub['id']);
@@ -195,6 +195,21 @@ function drawRectangle(data) {
                 $(this).find('.dis').hide();
                 $(this).css("z-index", "999900");
             });
+            var that = this;
+            div.addEventListener("click", function(e) {
+                var zoom = map.getZoom();
+                map.clearOverlays();
+                switch (zoom) {
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                        zoom = 18, searchtype = 'loupan';
+                        draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 1, 1, that._center, 1);
+                        break;
+                }
+
+            })
 
             // 将div添加到覆盖物容器中
             map.getPanes().markerPane.appendChild(div);
@@ -212,13 +227,15 @@ function drawRectangle(data) {
         var longitude = sub['x'];
         var latitude = sub['y'];
         var name = sub['projname'];
-        var text = sub['price'] + '元/㎡' + sub['tao'] + '套';
+        var text = sub['price'] + '元/㎡'; // + sub['tao'] + '套';
         var point = new BMap.Point(longitude, latitude);
         var marker = new CustomOverlay(point, name, text, sub['id']);
         // pointArray.push(point);
         map.addOverlay(marker);
     }
     // map.setViewport(pointArray);
+
+
 }
 
 //绘制区划
