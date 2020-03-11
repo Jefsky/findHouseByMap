@@ -46,6 +46,9 @@ https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&pric
 * 拖拽
 https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=113.804792&y1=23.037902&x2=113.873782&y2=23.057623&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=16&a=ajaxSearch&city=dg&searchtype=other
 
+* 接口样本
+https://dg.esf.fang.com/map/?mapmode=y&district=800&keyword=&orderby=30&x1=113.515279&y1=22.97771&x2=113.791238&y2=23.042775&groupedmode=4&PageNo=1&zoom=14&a=ajaxSearch&city=dg&searchtype=
+
 ## 小程序 
 腾讯地图
 

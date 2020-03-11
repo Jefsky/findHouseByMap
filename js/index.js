@@ -14,11 +14,45 @@ map.setMinZoom(12);
 map.setMaxZoom(18);
 var pointArray = [];
 var bounds = map.getBounds();
-$.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=' + bounds.Le + '&y1=' + bounds.Xd + '&x2=' + bounds.He + '&y2=' + bounds.Vd + '&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=12&a=ajaxSearch&city=dg&searchtype=' + searchtype, function(data) {
-    drawCircle(data);
-    console.log('town')
+var city = 'dg',
+    zoom = '12',
+    district = '';
+draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 0, 0, 0, 0);
 
-});
+/**
+ * draw绘制覆盖物
+ * @param {地区id} district 
+ * @param {bounds.Le} Le 
+ * @param {bounds.Xd} Xd 
+ * @param {bounds.He} He 
+ * @param {bounds.Vd} Vd 
+ * @param {缩放倍数} zoom 
+ * @param {城市} city 
+ * @param {搜索类型} searchtype 
+ * @param {图形1,0} form 
+ * @param {点击事件1,0} click
+ * @param {中心点} center
+ * @param {地图默认缩放级别1显示楼盘,0地区} centerAndZoom 
+ * draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, form, click,centerAndZoom)
+ */
+function draw(district, Le, Xd, He, Vd, zoom, city, searchtype, form, click, center, centerAndZoom) {
+    $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=' + district + '&keyword=&orderby=30&x1=' + Le + '&y1=' + Xd + '&x2=' + He + '&y2=' + Vd + '&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=' + city + '&searchtype=' + searchtype, function(data) {
+        if (form) {
+            drawRectangle(data);
+        } else {
+            drawCircle(data);
+        }
+        if (click) {
+            if (centerAndZoom) {
+                map.centerAndZoom(center, 16);
+            } else {
+                map.centerAndZoom(center, zoom + 3);
+            }
+        }
+        console.log('town')
+
+    });
+}
 
 // 定义构造函数并继承Overlay
 function CustomOverlay(center, name, text, comarea, id) {
@@ -53,7 +87,6 @@ CustomOverlay.prototype.hide = function() {
         this._div.style.display = 'none';
     }
 }
-
 
 // 绘制圆形覆盖物
 function drawCircle(data) {
@@ -104,23 +137,14 @@ function drawCircle(data) {
                 map.clearOverlays();
                 switch (zoom) {
                     case 15:
-                        $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=16&a=ajaxSearch&city=dg&searchtype=loupan', function(data) {
-                            drawCircle(data);
-                            console.log(that._center)
-                            map.centerAndZoom(that._center, 16); //地图默认缩放级别
-                        });
+                        zoom = 16, searchtype = 'loupan';
+                        draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 0, 1, that._center, 1);
                         break;
                     default:
-                        $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=dg&searchtype=', function(data) {
-                            drawCircle(data);
-                            console.log(that._center)
-                            map.centerAndZoom(that._center, zoom + 3); //地图默认缩放级别
-                        });
+                        draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 0, 1, that._center, 0);
                 }
 
             })
-
-
 
             // 将div添加到覆盖物容器中
             map.getPanes().markerPane.appendChild(div);
@@ -220,33 +244,20 @@ map.addEventListener("zoomend", function(evt) {
     var zoom = map.getZoom();
     var bounds = map.getBounds();
     console.log(zoom)
+    map.clearOverlays();
     switch (zoom) {
         case 10:
         case 11:
         case 12:
-            map.clearOverlays();
-            $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=' + bounds.Le + '&y1=' + bounds.Xd + '&x2=' + bounds.He + '&y2=' + bounds.Vd + '&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=dg&searchtype=' + searchtype, function(data) {
-                drawCircle(data);
-                console.log('town')
-            });
-            break;
         case 13:
         case 14:
         case 15:
-            map.clearOverlays();
-            $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=' + bounds.Le + '&y1=' + bounds.Xd + '&x2=' + bounds.He + '&y2=' + bounds.Vd + '&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=dg&searchtype=' + searchtype, function(data) {
-                drawCircle(data);
-                console.log('area')
-            });
+            draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 0, 0, 0, 0);
             break;
         case 16:
         case 17:
         case 18:
-            map.clearOverlays();
-            $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=' + bounds.Le + '&y1=' + bounds.Xd + '&x2=' + bounds.He + '&y2=' + bounds.Vd + '&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=dg&searchtype=' + searchtype, function(data) {
-                drawRectangle(data);
-                console.log('estate')
-            });
+            draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 1, 0, 0, 0);
             break;
     }
 });
@@ -272,47 +283,27 @@ geolocation.getCurrentPosition(function(r) {
                 x: pixel.x,
                 y: pixel.y
             });
-            console.info('当前位置', map.getCenter());
             var zoom = map.getZoom();
-            var searchtype = ''
+            var bounds = map.getBounds();
+            map.clearOverlays();
             switch (zoom) {
                 case 10:
                 case 11:
                 case 12:
-                    searchtype = 'city';
-                    break;
                 case 13:
                 case 14:
                 case 15:
+                    draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 0, 0, 0, 0);
+                    break;
                 case 16:
                 case 17:
                 case 18:
                     searchtype = 'loupan';
+                    draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 1, 0, 0, 0);
                     break;
             }
-            var bounds = map.getBounds();
-            console.log('可视区域', bounds);
-            $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=&subwayline=&subwaystation=&price=&room=&area=&towards=&floor=&hage=&equipment=&keyword=&comarea=&orderby=30&isyouhui=&x1=' + bounds.Le + '&y1=' + bounds.Xd + '&x2=' + bounds.He + '&y2=' + bounds.Vd + '&newCode=&houseNum=&schoolDist=&schoolid=&ecshop=&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=dg&searchtype=' + searchtype, function(data) {
-                switch (zoom) {
-                    case 16:
-                    case 17:
-                    case 18:
-                        console.log('drawRectangle')
-                        map.clearOverlays();
-                        drawRectangle(data);
-                        break;
-                    default:
-                        map.clearOverlays();
-                        drawCircle(data);
-                }
-            });
         });
     } else {
         alert('failed' + this.getStatus());
     }
 });
-
-
-$('.lpNum').click(function() {
-    console.log('sasasas');
-})
