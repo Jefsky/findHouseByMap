@@ -61,7 +61,7 @@ input {
     z-index: 7;
     width: 74px;
     height: 74px;
-    background: url(findHouseByMap/img/map-circleBg.png) no-repeat -1px -1px;
+    background: url(../img/map-circleBg.png) no-repeat -1px -1px;
 }
 
 .lpNum>li>a {
@@ -127,7 +127,7 @@ input {
     white-space: nowrap;
     height: 28px;
     line-height: 28px;
-    background: url(/img/gang_ditu.png) no-repeat left center #199752;
+    background: url(../img/gang_ditu.png) no-repeat left center #199752;
     padding: 0px 14px 0 7px;
     font-size: 13px;
     color: #ffffff;
