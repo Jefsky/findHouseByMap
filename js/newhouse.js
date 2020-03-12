@@ -1,7 +1,9 @@
 // 百度地图API功能  08HppseHkx93WlQMpEzWGRUgF971DaD9
 
 var searchtype = ''; //检索类型
-var map = new BMap.Map("allmap");
+var map = new BMap.Map("allmap", {
+    enableMapClick: false //取消默认窗口
+});
 var point = new BMap.Point(113.936456, 23.044025); //地图中心
 map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
 map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
@@ -16,7 +18,9 @@ var pointArray = [];
 var bounds = map.getBounds();
 var city = 'dg',
     zoom = '12',
-    district = '';
+    district = '',
+    keyword = '',
+    start = 1;
 draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 0, 0, 0, 0);
 
 /**
@@ -34,9 +38,10 @@ draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtyp
  * @param {中心点} center
  * @param {地图默认缩放级别1显示楼盘,0地区} centerAndZoom 
  * draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, form, click,centerAndZoom)
+ * http://local.fzg360.com/index.php/house/ajax_map?district=&keyword=&x1=113.384537&y1=22.89176&x2=114.488375&y2=23.196116&start=1&zoom=15&city=dg
  */
 function draw(district, Le, Xd, He, Vd, zoom, city, searchtype, form, click, center, centerAndZoom) {
-    $.getJSON('http://local.fzg360.com/index.php/house/ajax_map?mapmode=y&district=' + district + '&keyword=&orderby=30&x1=' + Le + '&y1=' + Xd + '&x2=' + He + '&y2=' + Vd + '&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=' + city + '&searchtype=' + searchtype, function(data) {
+    $.getJSON('http://local.fzg360.com/index.php/house/ajax_map?district=' + district + '&keyword=' + keyword + '&x1=' + Le + '&y1=' + Xd + '&x2=' + He + '&y2=' + Vd + '&start=' + start + '&zoom=' + zoom + '&city=' + city + '&searchtype=' + searchtype, function(data) {
         if (form) {
             drawRectangle(data);
         } else {
@@ -44,13 +49,11 @@ function draw(district, Le, Xd, He, Vd, zoom, city, searchtype, form, click, cen
         }
         if (click) {
             if (centerAndZoom) {
-                map.centerAndZoom(center, 16);
+                map.centerAndZoom(center, 17);
             } else {
                 map.centerAndZoom(center, zoom + 3);
             }
         }
-        console.log('town')
-
     });
 }
 
@@ -162,10 +165,11 @@ function drawCircle(data) {
         var longitude = sub['x'];
         var latitude = sub['y'];
         var name = sub['projname'];
-        var text = '<br>' + sub['price'] + '元/㎡<br>'; //+ sub['tao'] + '套';
+        var text = '<br>' + sub['price'] + '万元/㎡<br>' + sub['tao'] + '套';
         var comarea = sub['baidu_coord'];
+        var id = sub['newcode'];
         var point = new BMap.Point(longitude, latitude);
-        var marker = new CustomOverlay(point, name, text, comarea, sub['id']);
+        var marker = new CustomOverlay(point, name, text, comarea, id);
         pointArray.push(point);
         map.addOverlay(marker);
     }
@@ -184,7 +188,7 @@ function drawRectangle(data) {
 
             var son = document.createElement("div");
             $(son).addClass('lpTip');
-            $(son).append('<a>' + this._text + '<div></div> <span class="dis" style="display: none;">' + this._name + '</span></a>');
+            $(son).append('<a href="http://' + city + '.fzg360.com/house/home/id/' + this._id + '.html" target="_blank">' + this._text + '<div></div> <span class="dis" style="display: none;">' + this._name + '</span></a>');
 
             div.appendChild(son);
             $(div).mouseover(function() {
@@ -204,7 +208,7 @@ function drawRectangle(data) {
                     case 16:
                     case 17:
                     case 18:
-                        zoom = 18, searchtype = 'loupan';
+                        zoom = 17, searchtype = 'loupan';
                         draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 1, 1, that._center, 1);
                         break;
                 }
@@ -227,9 +231,11 @@ function drawRectangle(data) {
         var longitude = sub['x'];
         var latitude = sub['y'];
         var name = sub['projname'];
-        var text = sub['price'] + '元/㎡'; // + sub['tao'] + '套';
+        var text = sub['price'] ? sub['price'] + '元/㎡' : '待定'; //+ sub['tao'] + '套';
+        var comarea = sub['baidu_coord'];
+        var id = sub['newcode'];
         var point = new BMap.Point(longitude, latitude);
-        var marker = new CustomOverlay(point, name, text, sub['id']);
+        var marker = new CustomOverlay(point, name, text, comarea, id);
         // pointArray.push(point);
         map.addOverlay(marker);
     }
@@ -260,7 +266,6 @@ map.addEventListener("zoomend", function(evt) {
     var offsetPoint = new BMap.Pixel(evt.offsetX, evt.offsetY);   //记录鼠标当前点坐标
     var zoom = map.getZoom();
     var bounds = map.getBounds();
-    console.log(zoom)
     map.clearOverlays();
     switch (zoom) {
         case 10:

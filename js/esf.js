@@ -1,7 +1,9 @@
 // 百度地图API功能  08HppseHkx93WlQMpEzWGRUgF971DaD9
 
 var searchtype = ''; //检索类型
-var map = new BMap.Map("allmap");
+var map = new BMap.Map("allmap", {
+    enableMapClick: false //取消默认窗口
+});
 var point = new BMap.Point(113.936456, 23.044025); //地图中心
 map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
 map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
@@ -44,13 +46,11 @@ function draw(district, Le, Xd, He, Vd, zoom, city, searchtype, form, click, cen
         }
         if (click) {
             if (centerAndZoom) {
-                map.centerAndZoom(center, 16);
+                map.centerAndZoom(center, 17);
             } else {
                 map.centerAndZoom(center, zoom + 3);
             }
         }
-        console.log('town')
-
     });
 }
 
@@ -204,7 +204,7 @@ function drawRectangle(data) {
                     case 16:
                     case 17:
                     case 18:
-                        zoom = 18, searchtype = 'loupan';
+                        zoom = 17, searchtype = 'loupan';
                         draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 1, 1, that._center, 1);
                         break;
                 }
@@ -260,7 +260,6 @@ map.addEventListener("zoomend", function(evt) {
     var offsetPoint = new BMap.Pixel(evt.offsetX, evt.offsetY);   //记录鼠标当前点坐标
     var zoom = map.getZoom();
     var bounds = map.getBounds();
-    console.log(zoom)
     map.clearOverlays();
     switch (zoom) {
         case 10:
