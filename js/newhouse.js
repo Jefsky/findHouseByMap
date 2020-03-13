@@ -49,7 +49,7 @@ function draw(district, Le, Xd, He, Vd, zoom, city, searchtype, form, click, cen
         }
         if (click) {
             if (centerAndZoom) {
-                map.centerAndZoom(center, 17);
+                map.centerAndZoom(center, 18);
             } else {
                 map.centerAndZoom(center, zoom + 3);
             }
@@ -137,10 +137,11 @@ function drawCircle(data) {
             });
             div.addEventListener("click", function(e) {
                 var zoom = map.getZoom();
+                var bounds = map.getBounds();
                 map.clearOverlays();
                 switch (zoom) {
                     case 15:
-                        zoom = 16, searchtype = 'loupan';
+                        zoom = 18, searchtype = 'loupan';
                         draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 0, 1, that._center, 1);
                         break;
                     default:
@@ -188,7 +189,7 @@ function drawRectangle(data) {
 
             var son = document.createElement("div");
             $(son).addClass('lpTip');
-            $(son).append('<a href="http://' + city + '.fzg360.com/house/home/id/' + this._id + '.html" target="_blank">' + this._text + '<div></div> <span class="dis" style="display: none;">' + this._name + '</span></a>');
+            $(son).append('<a  href="http://'  +  city  +  '.fzg360.com/house/home/id/'  +  this._id  +  '.html" target="_blank">' + this._text + '<div></div> <span class="dis" style="display: none;">' + this._name + '</span></a>');
 
             div.appendChild(son);
             $(div).mouseover(function() {
@@ -202,13 +203,13 @@ function drawRectangle(data) {
             var that = this;
             div.addEventListener("click", function(e) {
                 var zoom = map.getZoom();
+                var bounds = map.getBounds();
                 map.clearOverlays();
                 switch (zoom) {
                     case 15:
                     case 16:
                     case 17:
-                    case 18:
-                        zoom = 17, searchtype = 'loupan';
+                        zoom = 17;
                         draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 1, 1, that._center, 1);
                         break;
                 }
