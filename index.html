@@ -5,15 +5,108 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="./style/style.css">
-    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=08HppseHkx93WlQMpEzWGRUgF971DaD9"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=2BFfuRDniWLCcCwPQpKKs9Rw"></script>
     <title>地图找房</title>
 </head>
 
 <body>
-    <div id="allmap"></div>
+    <div class="header"></div>
+    <div class="maparea">
+        <div class="maptool">
+            <div class="toolbox">
+                <div class="inputbox">
+                    <input class="search-input" type="text" autocomplete="off" placeholder="请输入小区名/地名/学校名">
+                    <a href="#"></a>
+                    <ul class="seaTip dis">
+                        <li id="esf_D02_14">
+                            <a data-key="东城" target="" data-district="东城" data-comarea="" class="clearfix">
+                                <div>东城<span>东城</span><span></span></div><span>8336条房源</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dropdown-box1">
+                    <div class="seaSelectM1 mt5" id="schoolDist">
+                        <div class="haveSelM1" id="schoolDistParam"><span id="schoolDistParamContent">学校找房</span><em class=""></em></div>
+                        <div class="priceSel01 dis" id="schoolDistContent">
+                            <ul>
+                                <li id="esf_E01_52">
+                                    <div></div><a data-id="1">双语</a></li>
+                                <li id="esf_E01_63"><a class="font14" data-id="">取消</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="henggang"></div>
+                    <div class="seaSelect mt5" id="area" style="z-index: 11;">
+                        <div class="haveSel" id="areaParam"><span id="areaParamContent">区域找房</span><em class=""></em></div>
+                        <div class="area clearfix qy" id="esf_E01_08">
+                            <ul id="distAreaLeft" class="areaL" style="min-height: 288px;">
+                                <li class="clearfix" data-id="all,99" style="background-color: rgb(243, 243, 243);"><a data-id="all" data-x="" data-y="" data-areaid="">全部</a><a data-id="99" data-x="113.75064086914" data-y="23.024320602417" data-areaid="17405">南城</a></li>
+                                <li class="clearfix" data-id="105,98" style="background-color: rgb(243, 243, 243);"><a data-id="105" data-x="113.80903625488" data-y="22.821039199829" data-areaid="6257">长安</a><a data-id="98" data-x="113.78968811035" data-y="23.034345626831" data-areaid="3059">东城</a></li>
+                            </ul>
+                            <div id="distAreaRight" class="areaR">
+                                <ul class="clearfix hide" data-id="99" style="display: none;">
+                                    <li class="areaRtitle" data-id="99" data-x="113.75064086914" data-y="23.024320602417">南城</li>
+                                    <li><a data-id="all" data-x="113.75064086914" data-y="23.024320602417">全部</a></li>
+                                    <li><a data-id="17405" data-x="113.71406555176" data-y="22.99107170105">白马</a></li>
+                                </ul>
+                                <div class="lineH hide" style="display: none;"></div>
+                                <ul class="clearfix hide" data-id="105" style="display: none;">
+                                    <li class="areaRtitle" data-id="105" data-x="113.80903625488" data-y="22.821039199829">长安</li>
+                                    <li><a data-id="all" data-x="113.80903625488" data-y="22.821039199829">全部</a></li>
+                                    <li><a data-id="6257" data-x="113.811668396" data-y="22.807888031006">长安中心区</a></li>
+                                </ul>
+                                <div class="lineH hide" style="display: none;"></div>
+                                <ul class="clearfix hide" data-id="98" style="display: none;">
+                                    <li class="areaRtitle" data-id="98" data-x="113.78968811035" data-y="23.034345626831">东城</li>
+                                    <li><a data-id="all" data-x="113.78968811035" data-y="23.034345626831">全部</a></li>
+                                    <li><a data-id="3059" data-x="113.76181030273" data-y="23.007022857666">东泰</a></li>
+                                </ul>
+                                <div class="lineH hide" style="display: none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="henggang"></div>
+                    <div class="seaSelect mt5" id="subway" style="z-index: 11;">
+                        <div class="haveSel arrleft" id="subwayParam"><span id="subwayParamContent">地铁找房</span><em class=""></em></div>
+                        <div class="area clearfix subway" id="esf_E01_09" style="width: 100px; display: none;">
+                            <ul id="subwayLeft" class="areaL">
+                                <li class="clearfix" data-id="all" style="background-color: white;"><a data-id="all">全部</a></li>
+                                <li class="clearfix" data-id="222" style="background-color: rgb(243, 243, 243);"><a data-id="222">2号线</a></li>
+                            </ul>
+                            <div id="subwayRight" class="areaR">
+                                <ul class="clearfix hide" data-title="2号线" data-id="222" style="display: none;">
+                                    <li data-id="8204"><a data-x="113.86686706543" data-y="23.09476852417">东莞火车站</a></li>
+                                    <li data-id="8205"><a data-x="113.85168457031" data-y="23.085687637329">茶山站</a></li>
+
+                                </ul>
+                                <ul class="clearfix hide" data-title="2号线" data-id="222" style="display: none;">
+                                    <li data-id="8216"><a data-x="113.67101287842" data-y="22.932834625244">珊美站</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-box2">
+
+                </div>
+                <div class="toolboxdown"></div>
+            </div>
+            <div class="resultbox"></div>
+        </div>
+        <div id="allmap" class="marR"></div>
+    </div>
 </body>
 
 </html>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <!-- <script src="./js/esf.js"></script> -->
 <script src="./js/newhouse.js"></script>
+<script>
+    $('.boxup-search-input').click(function() {
+        $('.seaTip').removeClass('dis');
+    })
+    $('.boxup-search-input').blur(function() {
+        $('.seaTip').addClass('dis');
+    })
+</script>

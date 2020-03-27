@@ -1,11 +1,13 @@
 body,
 html,
-#allmap {
+#allmap,
+.maparea {
     width: 100%;
     height: 100%;
     overflow: hidden;
     margin: 0;
     font-family: "微软雅黑";
+    font-size: 12px;
 }
 
 div,
@@ -57,6 +59,434 @@ input {
     font-size: 12px;
     padding: 0;
     font-family: inherit;
+}
+
+.maparea {
+    z-index: 0;
+}
+
+.maptool {
+    width: 400px;
+    position: absolute;
+    z-index: 2;
+    top: 50px;
+    left: 0;
+}
+
+.toolbox {
+    background-color: #fff;
+    height: 100px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+    margin: 10px;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0 10px 10px;
+}
+
+.toolbox div {
+    float: left;
+}
+
+.inputbox {
+    width: 360px;
+    height: 32px;
+    position: relative;
+    z-index: 20;
+}
+
+.inputbox>input {
+    width: 300px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    border-right: none;
+    line-height: 30px;
+    float: left;
+    height: 30px;
+}
+
+.inputbox>a {
+    width: 38px;
+    height: 32px;
+    background: url(/img/fdj_icon.png) no-repeat center center #cf0000;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.seaTip {
+    width: 358px;
+    padding: 5px 0;
+    padding-top: 0;
+    border: 1px solid #ddd;
+    position: absolute;
+    z-index: 100!important;
+    left: 0;
+    top: 31px;
+    background: #ffffff!important;
+    box-shadow: 0px 3px 8px #999;
+    -moz-box-shadow: 0px 3px 8px #999;
+    -webkit-box-shadow: 0px 3px 8px #999;
+}
+
+.dis {
+    display: none;
+}
+
+.seaTip>li {
+    padding: 0 10px;
+    position: relative;
+}
+
+.seaTip>li:hover {
+    background-color: #f3f3f3;
+}
+
+.seaTip>li>a,
+.seaTip>li>a:hover {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    color: #333;
+    cursor: pointer;
+}
+
+.seaTip>li>a>div,
+.seaTip>li>a:hover>div {
+    float: left;
+    color: #333;
+}
+
+.seaTip>li>a>span,
+.seaTip>li>a:hover>span {
+    float: right;
+    color: #333;
+}
+
+.seaTip>li>a>div>span,
+.seaTip>li>a:hover>div>span {
+    font-size: 12px;
+    color: #666;
+    margin-left: 5px;
+}
+
+.haveSel {
+    width: 64px;
+    height: 20px;
+    overflow: hidden;
+    line-height: 20px;
+    margin-top: 6px;
+}
+
+.seaSelectM1 {
+    width: 70px;
+    z-index: 11;
+    position: relative;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.haveSelM1 {
+    width: 64px;
+    height: 20px;
+    overflow: hidden;
+    line-height: 20px;
+    margin-top: 6px;
+}
+
+.mt5 {
+    margin-top: 5px;
+}
+
+span#schoolDistParamContent {
+    width: 59px;
+    height: 20px;
+    overflow: hidden;
+    line-height: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.haveSel>em.up,
+.haveSelM>em.up,
+.haveSelM1>em.up {
+    width: 10px;
+    height: 5px;
+    background: url(/img/up_icon.png) no-repeat;
+    position: absolute;
+    right: 6px;
+    top: 14px;
+    transition: transform 1s;
+    -webkit-transition: transform 1s;
+    -moz-transition: transform 1s;
+    -o-transition: transform 1s;
+    -ms-transition: transform 1s;
+}
+
+.haveSel>em,
+.haveSelM>em,
+.haveSelM1>em {
+    width: 10px;
+    height: 5px;
+    background: url(/img/down_icon.png) no-repeat;
+    position: absolute;
+    right: 6px;
+    top: 14px;
+    transition: transform 1s;
+    -webkit-transition: transform 1s;
+    -moz-transition: transform 1s;
+    -o-transition: transform 1s;
+    -ms-transition: transform 1s;
+}
+
+.haveSelM1>em,
+.haveSelM1>em.up,
+.haveSel>em,
+.haveSel>em.up {
+    right: 0px;
+}
+
+.priceSel01 li div.on {
+    background: url(/img/cho_icon.jpg) no-repeat center center;
+}
+
+.priceSel01 li div {
+    width: 13px;
+    height: 13px;
+    border: 1px solid #b8b8b8;
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    background-color: #fff;
+}
+
+.haveSel {
+    width: 64px;
+    height: 20px;
+    overflow: hidden;
+    line-height: 20px;
+    margin-top: 6px;
+}
+
+.qy {
+    left: -2px;
+}
+
+.area {
+    border: 1px solid #ddd;
+    position: absolute;
+    top: 30px;
+    left: 7px;
+    z-index: 101;
+    background-color: #fff;
+    min-height: 288px;
+    max-height: 570px;
+    display: none;
+    overflow: hidden;
+}
+
+.areaL {
+    float: left;
+    width: 128px;
+    padding: 10px 0;
+    background-color: #f3f3f3;
+    min-height: 288px;
+}
+
+.qy .areaL>li {
+    height: 28px;
+    line-height: 28px;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    *vertical-align: top;
+    position: relative;
+    left: 1px;
+}
+
+.qy .areaL>li>a {
+    display: block;
+    margin: 0 0px 0 10px;
+    float: left;
+    font-size: 12px;
+    color: #333;
+    text-align: left;
+    width: 48px;
+    overflow: hidden;
+    height: 28px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.areaL>li>a {
+    display: block;
+    margin: 0 5px 0 9px;
+    float: left;
+    font-size: 12px;
+    color: #333;
+}
+
+.qy .areaR {
+    padding: 10px 3px;
+    background-color: #fff;
+    position: absolute;
+    left: 130px;
+    top: 7px;
+}
+
+.qy .areaR ul {
+    width: 414px;
+}
+
+.hide {
+    display: none;
+}
+
+.lineH {
+    width: 396px;
+    height: 1px;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+    margin-left: 13px;
+}
+
+.areaR>ul>li.areaRtitle {
+    float: none;
+    clear: both;
+    padding-left: 13px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #333;
+    cursor: default;
+}
+
+.areaR>ul>li {
+    float: left;
+    height: 30px;
+}
+
+.areaR>ul>li>a {
+    display: block;
+    height: 14px;
+    line-height: 14px;
+    margin-top: 8px;
+    padding: 0 12px;
+    border-right: 1px solid #ddd;
+    font-size: 12px;
+    color: #333;
+}
+
+.area.subway {
+    left: -1px;
+}
+
+.subway {
+    left: -2px;
+}
+
+.subway .areaL>li>a {
+    height: 24px;
+    line-height: 24px;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    *vertical-align: top;
+    position: relative;
+    left: 1px;
+    overflow: hidden;
+    width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.areaL>li>a {
+    display: block;
+    margin: 0 5px 0 9px;
+    float: left;
+    font-size: 12px;
+    color: #333;
+}
+
+.seaSelect {
+    width: 64px;
+    height: 32px;
+    font-size: 12px;
+    color: #333;
+    position: relative;
+    cursor: pointer;
+    z-index: 102;
+}
+
+.subway .areaR {
+    padding: 10px 3px;
+    background-color: #fff;
+    padding-top: 13px;
+    position: absolute;
+    left: 100px;
+}
+
+.subway .areaR>ul {
+    float: left;
+    width: 106px;
+}
+
+.subway .areaR>ul>li {
+    height: 27px;
+    float: none;
+    background: url(./img/hui_bg.jpg) repeat-y 24px center;
+    padding-left: 20px;
+    width: 122px;
+    overflow: hidden;
+}
+
+.areaR>ul>li {
+    float: left;
+    height: 30px;
+}
+
+.priceSel01 {
+    width: 224px;
+    border: 1px solid #ddd;
+    background-color: #f3f3f3;
+    position: absolute;
+    left: -15px;
+    top: 30px;
+    z-index: 99999;
+    padding: 10px 0;
+}
+
+.priceSel01 li {
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    cursor: pointer;
+    width: 60px;
+    padding-left: 38px;
+    margin-left: 6px;
+    position: relative;
+}
+
+.henggang {
+    height: 20px;
+    overflow: hidden;
+    line-height: 20px;
+    margin: 0 33px;
+    margin-top: 12px;
+    border-right: 1px solid #DDDDDD;
+}
+
+.subway .areaL {
+    float: left;
+    width: 100px;
+    overflow: hidden;
+    padding: 10px 0;
+    background-color: #f3f3f3;
+    min-height: 363px;
+}
+
+.mapLTB>div {
+    float: left;
+    margin-top: 5px;
+    position: relative;
 }
 
 .lpNum>li {

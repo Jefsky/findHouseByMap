@@ -1,16 +1,27 @@
 // 百度地图API功能  08HppseHkx93WlQMpEzWGRUgF971DaD9
 
+// var wrapper = $(".wrapper"),
+//     mapL = $(".mapL"),
+//     map_h = $(window).innerHeight() - wrapper.offset().top,
+//     header_h = 89;
+
+// var l = map_h + "px";
+// wrapper.height(l), mapL.css({ "max-height": wrapper.height() })
+
+
+
+
 var searchtype = ''; //检索类型
-var map = new BMap.Map("allmap", {
+var map = new BMap.Map("mapCanvas", {
     enableMapClick: false //取消默认窗口
 });
 var point = new BMap.Point(113.936456, 23.044025); //地图中心
 map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
 map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
-map.addControl(new BMap.NavigationControl()); // 添加平移缩放控件
-map.addControl(new BMap.ScaleControl()); // 添加比例尺控件
-map.addControl(new BMap.OverviewMapControl()); //添加缩略地图控件
-map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+map.addControl(new BMap.NavigationControl({ anchor: BMAP_ANCHOR_BOTTOM_RIGHT })); // 添加平移缩放控件
+map.addControl(new BMap.ScaleControl({ anchor: BMAP_ANCHOR_BOTTOM_RIGHT })); // 添加比例尺控件
+map.addControl(new BMap.OverviewMapControl({ anchor: BMAP_ANCHOR_BOTTOM_RIGHT })); //添加缩略地图控件
+map.addControl(new BMap.MapTypeControl({ mapTypes: [BMAP_NORMAL_MAP] })); //添加地图类型控件
 map.centerAndZoom(point, 12); //地图默认缩放级别
 map.setMinZoom(12);
 map.setMaxZoom(18);
@@ -325,6 +336,7 @@ geolocation.getCurrentPosition(function(r) {
                     draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 1, 0, 0, 0);
                     break;
             }
+            console.log(bounds);
         });
     } else {
         alert('failed' + this.getStatus());

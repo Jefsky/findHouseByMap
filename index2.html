@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <title>【东莞地图找房，东莞二手房小区地图，东莞房产地图】-东莞房天下</title>
+    <meta name="description" content="东莞房天下为您提供实时的东莞二手房地图信息，全面的东莞小区位置及东莞二手房出售信息。让您通过简单直观的房产地图功能，在东莞地图找房子，为您创造舒适二手房购房体验。" />
+    <link href="./style/style2.css" rel="stylesheet" type="text/css">
+    <link href="./style/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=CHXavfEPM93DQaXukx39R7mC"></script>
+</head>
+
+<body class="tf">
+
+    <div class="wrapper ">
+        <div class="mapL">
+            <div class="mapLT">
+                <div class="mapLTT clearfix">
+                    <div class="mapSea w_360" id="suggestId"><input autocomplete="off" id="esf_E01_46" placeholder="请输入小区名/地名/学校名" class="w_300" type="text" style="color: rgb(153, 153, 153);" />
+                        <a id="esf_E01_06"></a>
+                        <ul class="seaTip dis" id="search_ad">
+                            <li class="removeBtn" style="display:none"><a>删除历史</a></li>
+                        </ul>
+                    </div>
+                    <div class="seaSelectM1 mt5" id="schoolDist" style="border: none;height: 32px;">
+                        <div class="haveSelM1" id="schoolDistParam"><span id="schoolDistParamContent">学校找房</span><em></em></div>
+                        <div class="priceSel01 dis" id="schoolDistContent">
+                            <ul>
+                                <li id="esf_E01_52">
+                                    <div></div><a data-id="1">双语</a></li>
+                                <li id="esf_E01_53">
+                                    <div></div><a data-id="2">小班教学</a></li>
+                                <li id="esf_E01_54">
+                                    <div></div><a data-id="3">寄宿制</a></li>
+                                <li id="esf_E01_55">
+                                    <div></div><a data-id="4">名校附属</a></li>
+                                <li id="esf_E01_56">
+                                    <div></div><a data-id="5">语文类</a></li>
+                                <li id="esf_E01_57">
+                                    <div></div><a data-id="6">外语类</a></li>
+                                <li id="esf_E01_58">
+                                    <div></div><a data-id="7">体育类</a></li>
+                                <li id="esf_E01_59">
+                                    <div></div><a data-id="8">科技类</a></li>
+                                <li id="esf_E01_60">
+                                    <div></div><a data-id="9">艺术类</a></li>
+                                <li id="esf_E01_61">
+                                    <div></div><a data-id="10">专业学科类</a></li>
+                                <li id="esf_E01_62">
+                                    <div></div><a data-id="11">特殊教育类</a></li>
+                                <li id="esf_E01_63"><a class="font14" data-id="">取消</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="henggang"></div>
+                    <div class="seaSelect mt5" id="area" style="z-index: 11;">
+                        <div class="haveSel" id='areaParam'><span id="areaParamContent">区域找房</span><em></em></div>
+                        <div class="area clearfix qy" id="esf_E01_08">
+                            <ul id="distAreaLeft" class="areaL"></ul>
+                            <div id="distAreaRight" class="areaR"></div>
+                        </div>
+                    </div>
+                    <div class="henggang"></div>
+                    <div class="seaSelect mt5" id="subway" style="z-index: 11;">
+                        <div class="haveSel arrleft" id='subwayParam'><span id="subwayParamContent">地铁找房</span><em></em></div>
+                        <div class="area clearfix subway" id="esf_E01_09">
+                            <ul id="subwayLeft" class="areaL"></ul>
+                            <div id="subwayRight" class="areaR"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mapLTB clearfix">
+                    <div class="seaSelectM">
+                        <div class="haveSelM" id='priceParam'><span id="priceParamContent" class="leixing">总价</span><em></em></div>
+                        <div class="priceSel dis w_160" id="esf_E01_10">
+                            <ul id="priceWrap">
+                                <li class="w_160"><a>不限</a></li>
+                                <li><a data-id="0-50">50万以下</a></li>
+                                <li><a data-id="50-80">50-80万</a></li>
+                                <li><a data-id="80-100">80-100万</a></li>
+                                <li><a data-id="100-120">100-120万</a></li>
+                                <li><a data-id="120-150">120-150万</a></li>
+                                <li><a data-id="150-200">150-200万</a></li>
+                                <li><a data-id="200-300">200-300万</a></li>
+                                <li><a data-id="300-">300万以上</a></li>
+                            </ul>
+                            <div class="w_160"><input id="priceBegTxt" type="text" />&nbsp;-&nbsp;<input id="priceEndTxt" t type="text" /> 万 <input id="priceInputBtn" type="button" value="确定" /></div>
+                        </div>
+                    </div>
+                    <div class="seaSelectM">
+                        <div class="haveSelM" id='huxingParam'><span id='huxingParamContent'>户型</span><em></em></div>
+                        <div class="priceSel dis" id="esf_E01_11">
+                            <ul id="roomWrap">
+                                <li><a data-id="">不限</a></li>
+                                <li><a data-id="1">一居</a></li>
+                                <li><a data-id="2">两居</a></li>
+                                <li><a data-id="3">三居</a></li>
+                                <li><a data-id="4">四居</a></li>
+                                <li><a data-id="5">五居</a></li>
+                                <li><a data-id="99">五居以上</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="seaSelectM">
+                        <div class="haveSelM" id='acreageParam'><span id="areaParamCont">面积</span><em></em></div>
+                        <div class="priceSel dis" id="esf_E01_12">
+                            <ul id="acreageWrap">
+                                <li><a data-id="">不限</a></li>
+                                <li><a data-id="0-50">50平米以下</a></li>
+                                <li><a data-id="50-70">50-70平米</a></li>
+                                <li><a data-id="70-90">70-90平米</a></li>
+                                <li><a data-id="90-110">90-110平米</a></li>
+                                <li><a data-id="110-130">110-130平米</a></li>
+                                <li><a data-id="130-150">130-150平米</a></li>
+                                <li><a data-id="150-200">150-200平米</a></li>
+                                <li><a data-id="200-300">200-300平米</a></li>
+                                <li><a data-id="300-">300平米以上</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="seaSelectM mr0">
+                        <div class="haveSelM more1" id="haveSelM"><span>更多条件</span><span id="moresearchcount"></span><em></em></div>
+                        <div class="haveSelTC dis" id="esf_E01_13">
+                            <dl class="clearfix" id="esf_E01_14"><dt>特&emsp;&emsp;色</dt>
+                                <dd id="housetag"><a data-id="">全部</a><a data-id="101">满五唯一</a><a data-id="116">满二</a><a data-id="2">不限购</a><a data-id="9">地铁房</a><a data-id="81">优质教育</a><a data-id="3">特价房</a></dd>
+                                <dd class="gang"></dd>
+                            </dl>
+                            <dl class="clearfix" id="esf_E01_15"><dt>朝&emsp;&emsp;向</dt>
+                                <dd id="towardsWrap"><a data-id="">全部</a><a data-id="0" data-value="南北">南北通透</a><a data-id="1" data-value="东西">东西向</a><a data-id="2" data-value="南">朝南</a><a data-id="3" data-value="北">朝北</a><a data-id="4" data-value="东">朝东</a><a data-id="5"
+                                        data-value="西">朝西</a></dd>
+                                <dd class="gang"></dd>
+                            </dl>
+                            <dl class="clearfix" id="esf_E01_16"><dt>楼&emsp;&emsp;层</dt>
+                                <dd id="floorWrap"><a data-id="">全部</a><a data-id="0-0">地下</a><a data-id="1-1">1层</a><a data-id="0-5">6层以下</a><a data-id="6-12">6-12层</a><a data-id="13-98">12层以上</a><a data-id="99-99">顶层</a></dd>
+                                <dd class="gang"></dd>
+                            </dl>
+                            <dl class="clearfix" id="esf_E01_17"><dt>房&emsp;&emsp;龄</dt>
+                                <dd id="hageWrap"><a data-id="">全部</a><a data-id="0-2">2年以下</a><a data-id="2-5">2-5年</a><a data-id="5-10">5-10年</a><a data-id="10-0">10年以上</a></dd>
+                            </dl>
+                            <dl class="clearfix" id="esf_E01_18"><dt>装&emsp;&emsp;修</dt>
+                                <dd id="equipmentWrap"><a data-id="">全部</a><a data-id="1">毛坯</a><a data-id="2">简装修</a><a data-id="3">精装修</a><a data-id="4">豪华装修</a><a data-id="5">中装修</a></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search_nei" id='searchResult'>
+                <p id="Tab" class="micon-map">
+                    <a id="esf_E01_43"></a>
+                </p>
+            </div>
+        </div>
+        <div id="esf_E01_04" class="marR">
+            <div class="map_bg" id="mapCanvas" style="height: 1000px;"></div>
+            <div class="mapCon">
+                <ul class="mapChoose">
+                    <li id="esf_E01_41">
+                        <div class="on"></div><a>移动地图时搜索</a></li>
+                    <li id="yxfy">
+                        <div class="on"></div><a>优选房源</a></li>
+                </ul>
+                <ul class="mapShai" id="paramContainer" style="display: none;left: 760px;">
+                    <li>已选条件：</li>
+                    <li><span id="paramContent"></span><a id="esf_E01_67" href="javascript:void(0)" class="qkqb">清空</a></li>
+                </ul>
+                <div class="qh"><span class="list"><a id="esf_E01_07" href="//dg.esf.fang.com/" target="_self">列表模式</a></span></div>
+            </div>
+        </div>
+    </div><input type="hidden" data-id="username" value=""><input type="hidden" data-id="citybs" value="b">
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<!-- <script src="./js/esf.js"></script> -->
+<script src="./js/newhouse.js"></script>
+
+</html>
