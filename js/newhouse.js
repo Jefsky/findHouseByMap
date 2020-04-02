@@ -86,24 +86,31 @@ $('#esf_E01_41').click(function() {
 $('#esf_E01_06').click(function() {
     search['keyword'] = $('#esf_E01_46').val();
     addCondition('keyword', search['keyword'])
-    draw(district, bounds.Ne, bounds.Xd, bounds.Je, bounds.Zd, zoom, city, searchtype, 1, 0, 0, 0);
-    map.centerAndZoom(point, 12);
 })
 
-// 条件搜索下拉
+// 关键字搜索
+$(document).keypress(function(e) {　　
+    if (e.keyCode == 13) {　
+        search['keyword'] = $('#esf_E01_46').val();
+        addCondition('keyword', search['keyword'])　　　　　　
+    }
+})
+
+// 条件搜索下拉出现
 function showDropdownList(obj) {
     let id = $(obj).attr('id');
     $('#' + id + 'Content').removeClass('dis');
     $(obj).find('em').addClass('up');
 }
 
+// 条件搜索下拉隐藏
 function hideDropdownList(obj) {
     let id = $(obj).attr('id');
     $('#' + id + 'Content').addClass('dis');
     $(obj).find('em').removeClass('up');
 }
 
-//
+// 选择勾选(学校)
 $('#schoolDistContent>ul>li').each(function() {
     $(this).click(function() {
         $(this).find('div').toggleClass('on');
@@ -113,42 +120,50 @@ $('#schoolDistContent>ul>li').each(function() {
 
 // 新增条件
 function addCondition(name, value, id) {
+    if (value == '') return false;
+    searchtype = 'house';
     value = $.trim(value);
-    if ($('a[data-name="' + name + '"][data-value="' + value + '"]').length) {
-        $('a[data-name="' + name + '"][data-value="' + value + '"]').remove();
-        let arr = search[name].split(',');
-        arr.forEach(function(index, value) {
-            if (arr[index] == value) {
-                arr.splice(index - 1, 1);
+    if (name == 'keyword') {
+        id = value;
+        let html = '<a href="javascript:void(0)" data-id="' + id + '" data-value="' + value + '" data-name="' + name + '" onClick="removeCondition(this)">' + value + '</a>';
+        $('#paramContent').html(html);
+        draw(district, bounds.Ne, bounds.Xd, bounds.Je, bounds.Zd, zoom, city, searchtype, 1, 0, 0, 0);
+        map.centerAndZoom(point, 12);
+        $('#paramContainer').show();
+    } else {
+        if ($('a[data-name="' + name + '"][data-value="' + value + '"]').length) {
+            $('a[data-name="' + name + '"][data-value="' + value + '"]').remove();
+            let arr = search[name].split(',');
+            arr.forEach(function(val, index) {
+                if (val == id) {
+                    arr.splice(index, 1);
+                }
+            })
+            let str = arr.join(',');
+            search[name] = str;
+            if (!$('#paramContent a').length) {
+                $('#paramContainer').hide();
+                searchtype = '';
+                initDraw();
+            }
+            console.log('search', search);
+            return false;
+        }
+        let html = '<a href="javascript:void(0)" data-id="' + id + '" data-value="' + value + '" data-name="' + name + '" onClick="removeCondition(this)">' + value + '</a>';
+        $('#paramContent').append(html);
+        search[name] = '';
+        $('#paramContent a[data-name="' + name + '"]').each(function() {
+            let id = $(this).attr('data-id');
+            let name = $(this).attr('data-name');
+            if (search[name].length) {
+                search[name] += ',' + id;
+            } else {
+                search[name] = id;
             }
         })
-        let str = arr.join(',');
-        console.log(str);
-        search[name] = str;
-        console.log(search)
-
-        if (!$('#paramContent a').length) {
-            $('#paramContainer').hide();
-            initDraw();
-        }
-        return false;
-    }
-    let html = '<a href="javascript:void(0)" data-id="' + id + '" data-value="' + value + '" data-name="' + name + '" onClick="removeCondition(this)">' + value + '</a>';
-    let data = [];
-    $('#paramContent').append(html);
-    search[name] = '';
-    $('#paramContent a[data-name="' + name + '"]').each(function() {
-        let id = $(this).attr('data-id');
-        let name = $(this).attr('data-name');
-        if (search[name].length) {
-            search[name] += ',' + id;
-        } else {
-            search[name] = id;
-        }
-    })
-    console.log(search)
-    if ($('#paramContent a').length) {
         $('#paramContainer').show();
+        draw(district, bounds.Ne, bounds.Xd, bounds.Je, bounds.Zd, zoom, city, searchtype, 1, 0, 0, 0);
+        map.centerAndZoom(point, 12);
     }
 }
 
@@ -170,6 +185,7 @@ function removeCondition(obj) {
     }
     if (!($('#paramContent a').length - 1)) {
         $('#paramContainer').hide();
+        searchtype = '';
         initDraw();
     }
     $(obj).remove();
@@ -178,6 +194,7 @@ function removeCondition(obj) {
 // 清空条件
 $('#esf_E01_67').click(function() {
     $('#esf_E01_46').val('');
+    searchtype = '';
     $.each(search, function(name, value) {
         search[name] = '';
     })
@@ -296,7 +313,7 @@ function drawCircle(data) {
         var longitude = sub['x'];
         var latitude = sub['y'];
         var name = sub['projname'];
-        var text = '<br>' + sub['price'] + '万元/㎡<br>' + sub['tao'] + '套';
+        var text = '<br>' + sub['price'] + '万元/㎡<br>' + sub['tao'] + '个楼盘';
         var comarea = sub['baidu_coord'];
         var id = sub['newcode'];
         var point = new BMap.Point(longitude, latitude);
@@ -366,7 +383,7 @@ function drawRectangle(data) {
         var sub = data.loupan.hit[i];
         var longitude = sub['x'];
         var latitude = sub['y'];
-        var name = sub['projname'];
+        var name = sub['projname'] + ' ' + sub['wylx_id'] + ' ' + sub['sale'];
         var text = sub['price'] ? sub['price'] + '元/㎡' : '待定'; //+ sub['tao'] + '套';
         var comarea = sub['baidu_coord'];
         var id = sub['newcode'];
@@ -410,7 +427,7 @@ map.addEventListener("zoomend", function(evt) {
         case 13:
         case 14:
         case 15:
-            if (search['keyword']) {
+            if (searchtype) {
                 form = 1;
             } else {
                 form = 0;
@@ -444,7 +461,7 @@ geolocation.getCurrentPosition(function(r) {
                 case 13:
                 case 14:
                 case 15:
-                    if (search['keyword']) {
+                    if (searchtype) {
                         form = 1;
                     } else {
                         form = 0;
