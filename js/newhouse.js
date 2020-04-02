@@ -287,7 +287,7 @@ function drawCircle(data) {
                 map.clearOverlays();
                 switch (zoom) {
                     case 15:
-                        zoom = 17, searchtype = 'loupan';
+                        zoom = 17;
                         draw(district, bounds.Ne, bounds.Xd, bounds.Je, bounds.Zd, zoom, city, searchtype, 0, 1, that._center, 1);
                         break;
                     default:
