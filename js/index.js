@@ -17,7 +17,7 @@ var bounds = map.getBounds();
 var city = 'dg',
     zoom = '12',
     district = '';
-console.log(bounds);
+console.log(bounds.Je);
 draw(district, bounds.$d, bounds.Je, bounds.Ne, bounds.Yd, zoom, city, searchtype, 0, 0, 0, 0);
 
 /**
