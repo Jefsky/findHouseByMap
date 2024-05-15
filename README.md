@@ -13,8 +13,8 @@
     ![Image text](https://github.com/Jefsky/findHouseByMap/blob/master/img/20200305145548.png)
     
 # 演示地址
-https://www.jefsky.com/demo/findHouseByMap/
-
+[https://www.jefsky.com/demo/findHouseByMap/
+](https://jefsky.github.io/findHouseByMap/)
 
 # 百度地圖api
 http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a0b0
