@@ -157,7 +157,7 @@ function drawCircle(data) {
             return div;
         }
         // 创建Map实例
-    if (typeof(data.loupan.hit) == 'undefined') { return false };
+    if (typeof(data.loupan.proj_count) == 'undefined') { return false };
     var pointArray = [];
     for (var i = 0; i < data.loupan.hit.length; i++) {
         var sub = data.loupan.hit[i];
