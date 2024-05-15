@@ -37,7 +37,8 @@ draw(district, bounds.$d, bounds.Je, bounds.Ne, bounds.Yd, zoom, city, searchtyp
  * draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, form, click,centerAndZoom)
  */
 function draw(district, Le, Xd, He, Vd, zoom, city, searchtype, form, click, center, centerAndZoom) {
-    $.getJSON('https://dg.esf.fang.com/map/?mapmode=y&district=' + district + '&keyword=&orderby=30&x1=' + Le + '&y1=' + Xd + '&x2=' + He + '&y2=' + Vd + '&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=' + city + '&searchtype=' + searchtype, function(data) {
+    //https://map.fang.com/ajaxSearch.html?city=&type=xf,esf,zf&xfPrice=&esfPrice=&zfPrice=&room=&area=&purpose=0&keyword=&zoom=4&newcodeType=&newcode=&pagingType=&pagingNum=1&x1=-89.33727345633645&x2=89.33727345633645&y1=-39.625258876947896&y2=39.625258876947896&subwayline=&subwaystation=&issamllcity=0&fapaiPrice=&fapaiPropertyType=&fapaiStage=&fapaiStatus=
+    $.getJSON('https://map.fang.com/ajaxSearch.html?district=' + district + '&keyword=&orderby=30&x1=' + Le + '&y1=' + Xd + '&x2=' + He + '&y2=' + Vd + '&groupedmode=4&PageNo=1&zoom=' + zoom + '&a=ajaxSearch&city=' + city + '&searchtype=' + searchtype, function(data) {
         if (form) {
             drawRectangle(data);
         } else {
