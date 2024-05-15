@@ -17,7 +17,7 @@ var bounds = map.getBounds();
 var city = 'dg',
     zoom = '12',
     district = '';
-draw(district, bounds.Le, bounds.Xd, bounds.He, bounds.Vd, zoom, city, searchtype, 0, 0, 0, 0);
+draw(district, bounds.$d, bounds.Je, bounds.Ne, bounds.Yd, zoom, city, searchtype, 0, 0, 0, 0);
 
 /**
  * draw绘制覆盖物
